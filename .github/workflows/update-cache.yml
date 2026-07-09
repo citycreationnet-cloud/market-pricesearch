@@ -1,0 +1,45 @@
+name: 相場データの更新
+
+on:
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 20 * * *'
+    steps:
+      - name: 当日が1日以外ならスキップ
+        id: check_day
+        run: |
+          if [ "$(date -u +%d)" != "01" ] && [ "${{ github.event_name }}" == "schedule" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: リポジトリを取得
+        if: steps.check_day.outputs.skip != 'true'
+        uses: actions/checkout@v4
+
+      - name: PHPをセットアップ
+        if: steps.check_day.outputs.skip != 'true'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: キャッシュ更新スクリプトを実行
+        if: steps.check_day.outputs.skip != 'true'
+        env:
+          REINFOLIB_API_KEY: ${{ secrets.REINFOLIB_API_KEY }}
+        run: php batch/update_cache.php
+
+      - name: 更新結果をコミット
+        if: steps.check_day.outputs.skip != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cache/
+          git diff --quiet && git diff --staged --quiet || git commit -m "相場データを自動更新 ($(date -u +%Y-%m-%d))"
+          git push
