@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エリア相場検索｜成約事例に基づく価格の目安</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233d;
+    --navy-2:#1f3252;
+    --paper:#f6f4ee;
+    --paper-2:#ffffff;
+    --brass:#b8935a;
+    --brass-deep:#8f6f3f;
+    --ink:#20242c;
+    --ink-soft:#5b6472;
+    --line:#dcd6c8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px;}
+
+  .masthead{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+    padding-bottom:20px;border-bottom:2px solid var(--navy);margin-bottom:28px;flex-wrap:wrap;
+  }
+  .masthead .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--brass-deep);font-weight:700;}
+  .masthead h1{font-family:'Noto Serif JP',serif;font-size:26px;line-height:1.4;margin:6px 0 0;color:var(--navy);}
+  .masthead .src{font-size:12px;color:var(--ink-soft);text-align:right;line-height:1.7;}
+
+  .search-card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:24px;
+    display:grid;grid-template-columns:1.1fr 1.1fr 1fr auto;gap:16px;align-items:end;
+    box-shadow:0 1px 2px rgba(22,35,61,.04);
+  }
+  @media (max-width:820px){ .search-card{grid-template-columns:1fr 1fr;} button.go{grid-column:1/-1;} }
+  @media (max-width:520px){ .search-card{grid-template-columns:1fr;} }
+
+  .field label{display:block;font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:6px;}
+  select{
+    width:100%;padding:12px 14px;font-size:15px;font-family:inherit;border:1px solid #c7c1b2;border-radius:3px;
+    background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23566"><path d="M6 9l6 6 6-6"/></svg>') no-repeat right 12px center;
+    appearance:none;color:var(--ink);
+  }
+  select:disabled{color:#9a9488;background-color:#f4f2ec;}
+  button.go{
+    padding:12px 28px;background:var(--navy);color:#fff;border:none;border-radius:3px;font-size:15px;
+    font-weight:700;letter-spacing:.03em;cursor:pointer;white-space:nowrap;transition:background .15s ease;
+  }
+  button.go:hover{background:var(--navy-2);}
+  button.go:disabled{background:#a9afba;cursor:not-allowed;}
+
+  .hint{font-size:12.5px;color:var(--ink-soft);margin:10px 2px 0;}
+
+  #result{margin-top:32px;}
+  .result-card{background:var(--paper-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+  .result-head{
+    background:var(--navy);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;
+    align-items:baseline;flex-wrap:wrap;gap:8px;
+  }
+  .result-head .place{font-family:'Noto Serif JP',serif;font-size:19px;}
+  .result-head .place b{color:var(--brass);font-weight:700;}
+  .result-head .updated{font-size:11.5px;color:#c6cedc;}
+
+  .figures{display:grid;grid-template-columns:1.3fr 1fr 1fr;border-bottom:1px solid var(--line);}
+  @media (max-width:640px){ .figures{grid-template-columns:1fr;} }
+  .figure{padding:22px 24px;border-right:1px solid var(--line);}
+  .figure:last-child{border-right:none;}
+  .figure .label{font-size:12px;color:var(--ink-soft);font-weight:700;letter-spacing:.03em;}
+  .figure .value{font-family:'Noto Serif JP',serif;font-size:32px;color:var(--navy);margin-top:6px;line-height:1;}
+  .figure .value small{font-size:14px;font-weight:500;color:var(--ink-soft);margin-left:4px;}
+  .figure .range{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
+  .figure.hero{background:#faf8f2;}
+  .figure.hero .value{color:var(--brass-deep);font-size:36px;}
+
+  .samples{padding:20px 24px 24px;}
+  .samples h3{font-size:13px;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;margin:0 0 12px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{padding:9px 8px;text-align:left;border-bottom:1px solid #ece7da;}
+  th{color:var(--ink-soft);font-weight:700;font-size:12px;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;}
+
+  .note{font-size:12px;color:var(--ink-soft);background:#faf8f2;border-top:1px solid var(--line);padding:14px 24px;line-height:1.7;}
+  .empty, .loading{padding:40px 24px;text-align:center;color:var(--ink-soft);font-size:14px;}
+  .badge{
+    display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:10px;
+    background:#efe6d3;color:var(--brass-deep);margin-left:8px;vertical-align:middle;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div>
+      <div class="eyebrow">AREA MARKET SEARCH</div>
+      <h1>あなたの物件、このエリアなら&nbsp;いくらで売れる？</h1>
+    </div>
+    <div class="src">出典：国土交通省「不動産情報ライブラリ」<br>成約価格情報をもとに集計（神奈川県全域対応）</div>
+  </div>
+
+  <div class="search-card">
+    <div class="field">
+      <label for="city-select">市区町村</label>
+      <select id="city-select"></select>
+    </div>
+    <div class="field">
+      <label for="district-select">エリア（地区）</label>
+      <select id="district-select" disabled><option>読み込み中...</option></select>
+    </div>
+    <div class="field">
+      <label for="type-select">種別</label>
+      <select id="type-select">
+        <option value="all">すべて</option>
+        <option value="land">土地のみ</option>
+        <option value="house">中古戸建のみ</option>
+        <option value="mansion">マンションのみ</option>
+      </select>
+    </div>
+    <button class="go" id="search-btn">相場を調べる</button>
+  </div>
+  <p class="hint">※国が公開する成約価格の届出データ（回収率は取引全体の一部）をもとにした参考値です。実際の査定額を保証するものではありません。㎡単価は「取引総額 ÷ 面積」で算出し、坪単価はそこから換算した参考値です。</p>
+
+  <div id="result"></div>
+
+</div>
+
+<script>
+/* =====================================================================
+ * このページはGitHub Pages上で完結する「静的サイト」です。
+ * バックエンドAPIは呼び出さず、GitHub Actionsが月1回生成した
+ * cache/{市区町村コード}.json を直接fetchして表示します。
+ * ===================================================================== */
+
+const TYPE_LABELS = { all: 'すべて', land: '土地', house: '中古戸建', mansion: 'マンション' };
+
+// config.php の TARGET_CITIES と同じ内容（表示名とコードの対応表）
+const CITIES = [
+  { code: '14101', name: '横浜市鶴見区' }, { code: '14102', name: '横浜市神奈川区' },
+  { code: '14103', name: '横浜市西区' },   { code: '14104', name: '横浜市中区' },
+  { code: '14105', name: '横浜市南区' },   { code: '14106', name: '横浜市保土ケ谷区' },
+  { code: '14107', name: '横浜市磯子区' }, { code: '14108', name: '横浜市金沢区' },
+  { code: '14109', name: '横浜市港北区' }, { code: '14110', name: '横浜市戸塚区' },
+  { code: '14111', name: '横浜市港南区' }, { code: '14112', name: '横浜市旭区' },
+  { code: '14113', name: '横浜市緑区' },   { code: '14114', name: '横浜市瀬谷区' },
+  { code: '14115', name: '横浜市栄区' },   { code: '14116', name: '横浜市泉区' },
+  { code: '14117', name: '横浜市青葉区' }, { code: '14118', name: '横浜市都筑区' },
+  { code: '14131', name: '川崎市川崎区' }, { code: '14132', name: '川崎市幸区' },
+  { code: '14133', name: '川崎市中原区' }, { code: '14134', name: '川崎市高津区' },
+  { code: '14135', name: '川崎市多摩区' }, { code: '14136', name: '川崎市宮前区' },
+  { code: '14137', name: '川崎市麻生区' },
+  { code: '14151', name: '相模原市緑区' }, { code: '14152', name: '相模原市中央区' },
+  { code: '14153', name: '相模原市南区' },
+  { code: '14201', name: '横須賀市' }, { code: '14203', name: '平塚市' },
+  { code: '14204', name: '鎌倉市' },   { code: '14205', name: '藤沢市' },
+  { code: '14206', name: '小田原市' }, { code: '14207', name: '茅ヶ崎市' },
+  { code: '14208', name: '逗子市' },   { code: '14210', name: '三浦市' },
+  { code: '14211', name: '秦野市' },   { code: '14212', name: '厚木市' },
+  { code: '14213', name: '大和市' },   { code: '14214', name: '伊勢原市' },
+  { code: '14215', name: '海老名市' }, { code: '14216', name: '座間市' },
+  { code: '14217', name: '南足柄市' }, { code: '14218', name: '綾瀬市' },
+  { code: '14301', name: '葉山町' },   { code: '14321', name: '寒川町' },
+  { code: '14341', name: '大磯町' },   { code: '14342', name: '二宮町' },
+  { code: '14361', name: '中井町' },   { code: '14362', name: '大井町' },
+  { code: '14363', name: '松田町' },   { code: '14364', name: '山北町' },
+  { code: '14366', name: '開成町' },   { code: '14382', name: '箱根町' },
+  { code: '14383', name: '真鶴町' },   { code: '14384', name: '湯河原町' },
+  { code: '14401', name: '愛川町' },   { code: '14402', name: '清川村' },
+];
+
+const citySelect = document.getElementById('city-select');
+const districtSelect = document.getElementById('district-select');
+const typeSelect = document.getElementById('type-select');
+const searchBtn = document.getElementById('search-btn');
+const resultEl = document.getElementById('result');
+
+let currentCityData = null; // 直近にfetchした市区町村のJSON全体をキャッシュしておく
+
+function init(){
+  citySelect.innerHTML = CITIES.map(c => `<option value="${c.code}">${c.name}</option>`).join('');
+  loadDistricts(citySelect.value);
+  citySelect.addEventListener('change', () => loadDistricts(citySelect.value));
+  searchBtn.addEventListener('click', runSearch);
+}
+
+async function loadDistricts(cityCode){
+  districtSelect.disabled = true;
+  districtSelect.innerHTML = `<option>読み込み中...</option>`;
+  resultEl.innerHTML = '';
+  currentCityData = null;
+
+  try {
+    // cache/14203.json のように、同じ階層の cache フォルダから直接読む
+    const res = await fetch(`cache/${encodeURIComponent(cityCode)}.json`, { cache: 'no-store' });
+    if (!res.ok) throw new Error('not found');
+    currentCityData = await res.json();
+  } catch (e) {
+    districtSelect.innerHTML = `<option>データがまだありません</option>`;
+    resultEl.innerHTML = `<div class="result-card"><div class="empty">
+      このエリアのデータはまだ生成されていません。<br>
+      GitHub Actionsの初回実行が完了すると表示されるようになります。
+    </div></div>`;
+    return;
+  }
+
+  const districts = Object.keys(currentCityData.districts).map(name => ({
+    name, count: currentCityData.districts[name].all.count,
+  }));
+  districts.sort((a, b) => b.count - a.count);
+
+  districtSelect.innerHTML = districts
+    .map(d => `<option value="${d.name}">${d.name}（成約${d.count}件）</option>`)
+    .join('');
+  districtSelect.disabled = false;
+}
+
+function runSearch(){
+  if (!currentCityData) return;
+
+  const cityName = currentCityData.municipality;
+  const district = districtSelect.value.replace(/（.*/, '');
+  const type = typeSelect.value;
+  const stats = currentCityData.districts[district]?.[type];
+
+  if (!stats) {
+    resultEl.innerHTML = `<div class="result-card"><div class="empty">データを取得できませんでした。</div></div>`;
+    return;
+  }
+
+  render({
+    municipality: cityName,
+    district,
+    type,
+    updated_at: currentCityData.updated_at,
+    sample_count: stats.count,
+    avg_price_per_sqm: stats.avg_price_per_sqm,
+    min_price_per_sqm: stats.min_price_per_sqm,
+    max_price_per_sqm: stats.max_price_per_sqm,
+    avg_price_per_tsubo: stats.avg_price_per_tsubo,
+    min_price_per_tsubo: stats.min_price_per_tsubo,
+    max_price_per_tsubo: stats.max_price_per_tsubo,
+    avg_trade_price: stats.avg_trade_price,
+    samples: stats.samples,
+  }, cityName);
+}
+
+// 金額はすべて「円」単位で保持しているため、表示時に万円へ変換する
+function manYen(yen){
+  if (yen === null || yen === undefined) return '－';
+  return Math.round(yen / 10000).toLocaleString('ja-JP') + '万円';
+}
+function dateJP(iso){
+  if (!iso) return '';
+  const d = new Date(iso);
+  return `${d.getFullYear()}年${d.getMonth()+1}月更新`;
+}
+
+function render(p, cityName){
+  const hasData = p.sample_count > 0;
+  const typeLabel = TYPE_LABELS[p.type] ?? 'すべて';
+
+  const rows = (p.samples || []).map(s => `
+    <tr>
+      <td>${s.period ?? '－'}</td>
+      <td>${s.type ?? '－'}</td>
+      <td class="num">${s.area ?? '－'}${s.area ? '㎡' : ''}</td>
+      <td class="num">${manYen(s.trade_price)}</td>
+      <td class="num">${s.price_per_sqm ? Math.round(s.price_per_sqm/10000).toLocaleString('ja-JP') + '万円/㎡' : '－'}</td>
+    </tr>
+  `).join('');
+
+  if (!hasData) {
+    resultEl.innerHTML = `
+      <div class="result-card">
+        <div class="result-head">
+          <div class="place">${cityName} <b>${p.district}</b> の相場<span class="badge">${typeLabel}</span></div>
+          <div class="updated">${dateJP(p.updated_at)}</div>
+        </div>
+        <div class="empty">このエリア・種別（${typeLabel}）に該当する成約事例が見つかりませんでした。<br>他の種別、または近隣エリアもあわせてご確認ください。</div>
+      </div>`;
+    return;
+  }
+
+  resultEl.innerHTML = `
+    <div class="result-card">
+      <div class="result-head">
+        <div class="place">${cityName} <b>${p.district}</b> の相場<span class="badge">${typeLabel}・成約${p.sample_count}件</span></div>
+        <div class="updated">${dateJP(p.updated_at)}</div>
+      </div>
+      <div class="figures">
+        <div class="figure hero">
+          <div class="label">平均㎡単価</div>
+          <div class="value">${manYen(p.avg_price_per_sqm)}<small>/㎡</small></div>
+          <div class="range">レンジ：${manYen(p.min_price_per_sqm)}〜${manYen(p.max_price_per_sqm)}／坪単価換算：約${manYen(p.avg_price_per_tsubo)}/坪</div>
+        </div>
+        <div class="figure">
+          <div class="label">平均成約価格</div>
+          <div class="value">${manYen(p.avg_trade_price)}</div>
+        </div>
+        <div class="figure">
+          <div class="label">成約件数</div>
+          <div class="value">${p.sample_count}<small>件</small></div>
+        </div>
+      </div>
+      <div class="samples">
+        <h3>直近の成約事例（サンプル）</h3>
+        <table>
+          <thead><tr><th>取引時期</th><th>種別</th><th>面積</th><th>成約価格</th><th>㎡単価</th></tr></thead>
+          <tbody>${rows || '<tr><td colspan="5">サンプルデータがありません</td></tr>'}</tbody>
+        </table>
+      </div>
+      <div class="note">
+        本結果は国土交通省「不動産情報ライブラリ」で公開されている成約価格情報を統計的に集計した参考値です。㎡単価は「取引総額 ÷ 面積」で算出しています（土地・戸建は土地面積、マンションは専有面積を使用）。坪単価は㎡単価を1坪=3.305785㎡で換算した参考値です。個別物件の条件により実際の価格は変動します。正確な査定をご希望の方はお問い合わせください。
+      </div>
+    </div>
+  `;
+}
+
+init();
+</script>
+</body>
+</html>
