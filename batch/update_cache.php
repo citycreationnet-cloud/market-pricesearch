@@ -60,7 +60,7 @@ foreach (TARGET_CITIES as $target) {
     $all = [];
     for ($y = $currentYear; $y > $currentYear - CACHE_YEARS_BACK; $y--) {
         try {
-            $records = $client->getTransactions($target['pref'], $target['city'], $y, null, '02');
+            $records = $client->getTransactions($target['pref'], $target['city'], $y, null, '');
             echo "  {$y}年: {$target['name']} {$target['name']} 全" . count($records) . "件\n";
             $all = array_merge($all, $records);
         } catch (Throwable $e) {
