@@ -1,0 +1,75 @@
+{
+    "municipality_code": "14104",
+    "municipality": "横浜市中区",
+    "updated_at": "2026-07-09T04:17:22+00:00",
+    "raw_record_count": 2,
+    "districts": {
+        "(地区名なし)": {
+            "all": {
+                "count": 2,
+                "avg_price_per_sqm": null,
+                "min_price_per_sqm": null,
+                "max_price_per_sqm": null,
+                "avg_price_per_tsubo": null,
+                "min_price_per_tsubo": null,
+                "max_price_per_tsubo": null,
+                "avg_trade_price": null,
+                "samples": [
+                    {
+                        "period": null,
+                        "type": null,
+                        "trade_price": null,
+                        "price_per_sqm": null,
+                        "price_per_tsubo": null,
+                        "area": null,
+                        "structure": null,
+                        "building_year": null
+                    },
+                    {
+                        "period": null,
+                        "type": null,
+                        "trade_price": null,
+                        "price_per_sqm": null,
+                        "price_per_tsubo": null,
+                        "area": null,
+                        "structure": null,
+                        "building_year": null
+                    }
+                ]
+            },
+            "land": {
+                "count": 0,
+                "avg_price_per_sqm": null,
+                "min_price_per_sqm": null,
+                "max_price_per_sqm": null,
+                "avg_price_per_tsubo": null,
+                "min_price_per_tsubo": null,
+                "max_price_per_tsubo": null,
+                "avg_trade_price": null,
+                "samples": []
+            },
+            "house": {
+                "count": 0,
+                "avg_price_per_sqm": null,
+                "min_price_per_sqm": null,
+                "max_price_per_sqm": null,
+                "avg_price_per_tsubo": null,
+                "min_price_per_tsubo": null,
+                "max_price_per_tsubo": null,
+                "avg_trade_price": null,
+                "samples": []
+            },
+            "mansion": {
+                "count": 0,
+                "avg_price_per_sqm": null,
+                "min_price_per_sqm": null,
+                "max_price_per_sqm": null,
+                "avg_price_per_tsubo": null,
+                "min_price_per_tsubo": null,
+                "max_price_per_tsubo": null,
+                "avg_trade_price": null,
+                "samples": []
+            }
+        }
+    }
+}
