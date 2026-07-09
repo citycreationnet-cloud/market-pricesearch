@@ -67,7 +67,8 @@ class ReinfolibClient
      */
     public function getMunicipalities(string $prefCode): array
     {
-        return $this->request('XIT002', ['area' => $prefCode]);
+        $result = $this->request('XIT002', ['area' => $prefCode]);
+        return $result['data'] ?? [];
     }
 
     /**
@@ -99,6 +100,7 @@ class ReinfolibClient
             $params['quarter'] = $quarter;
         }
 
-        return $this->request('XIT001', $params);
+        $result = $this->request('XIT001', $params);
+        return $result['data'] ?? [];
     }
 }
