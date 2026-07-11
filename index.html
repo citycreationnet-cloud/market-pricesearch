@@ -94,34 +94,6 @@
     display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:10px;
     background:#efe6d3;color:var(--brass-deep);margin-left:8px;vertical-align:middle;
   }
-  .cta-footer{
-    margin-top:40px;
-    background:var(--paper-2);
-    border:1px solid var(--line);
-    border-top:3px solid var(--brass);
-    border-radius:4px;
-    padding:32px 24px;
-    text-align:center;
-  }
-  .cta-logo{
-    max-width:220px;
-    width:60%;
-    height:auto;
-    margin-bottom:20px;
-  }
-  .cta-button{
-    display:inline-block;
-    padding:14px 36px;
-    background:var(--navy);
-    color:#fff;
-    font-weight:700;
-    font-size:16px;
-    border-radius:3px;
-    text-decoration:none;
-    letter-spacing:.03em;
-    transition:background .15s ease;
-  }
-  .cta-button:hover{ background:var(--navy-2); }
 </style>
 </head>
 <body>
@@ -155,17 +127,10 @@
     </div>
     <button class="go" id="search-btn">相場を調べる</button>
   </div>
-  <p class="hint">※国が公開する成約価格の届出データ（回収率は取引全体の一部）をもとにした参考値です。実際の査定額を保証するものではありません。㎡単価は「取引総額 ÷ 面積」で算出し、坪単価はそこから換算した参考値です。</p>
+  <p class="hint">※国が公開する成約価格の届出データ（回収率は取引全体の一部）をもとにした参考値です。実際の査定額を保証するものではありません。坪単価は「取引総額 ÷ 面積 × 3.305785」で算出しています。地区は町字単位（丁目単位ではありません）。</p>
 
   <div id="result"></div>
-<div class="cta-footer">
-    <img src="assets/logo.png" alt="株式会社シティクリエイション" class="cta-logo">
-    <div>
-      <a class="cta-button" href="https://citycreationnet-cloud.github.io/ouchi-shindan/" target="_blank" rel="noopener">
-        無料査定・売却相談はこちら
-      </a>
-    </div>
-  </div>
+
 </div>
 
 <script>
@@ -298,19 +263,33 @@ function dateJP(iso){
   return `${d.getFullYear()}年${d.getMonth()+1}月更新`;
 }
 
+// BuildingYearの文字列（例："2014年"）から築年数を計算する
+function buildingAge(buildingYear){
+  if (!buildingYear) return null;
+  const m = String(buildingYear).match(/(\d{4})/);
+  if (!m) return null;
+  const age = new Date().getFullYear() - parseInt(m[1], 10);
+  return age >= 0 ? age : null;
+}
+
 function render(p, cityName){
   const hasData = p.sample_count > 0;
   const typeLabel = TYPE_LABELS[p.type] ?? 'すべて';
 
-  const rows = (p.samples || []).map(s => `
+  const rows = (p.samples || []).map(s => {
+    const age = buildingAge(s.building_year);
+    return `
     <tr>
       <td>${s.period ?? '－'}</td>
       <td>${s.type ?? '－'}</td>
       <td class="num">${s.area ?? '－'}${s.area ? '㎡' : ''}</td>
+      <td class="num">${s.total_floor_area ? s.total_floor_area + '㎡' : '－'}</td>
+      <td class="num">${age !== null ? age + '年' : '－'}</td>
       <td class="num">${manYen(s.trade_price)}</td>
-      <td class="num">${s.price_per_sqm ? Math.round(s.price_per_sqm/10000).toLocaleString('ja-JP') + '万円/㎡' : '－'}</td>
+      <td class="num">${s.price_per_tsubo ? manYen(s.price_per_tsubo) + '/坪' : '－'}</td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
 
   if (!hasData) {
     resultEl.innerHTML = `
@@ -332,9 +311,9 @@ function render(p, cityName){
       </div>
       <div class="figures">
         <div class="figure hero">
-          <div class="label">平均㎡単価</div>
-          <div class="value">${manYen(p.avg_price_per_sqm)}<small>/㎡</small></div>
-          <div class="range">レンジ：${manYen(p.min_price_per_sqm)}〜${manYen(p.max_price_per_sqm)}／坪単価換算：約${manYen(p.avg_price_per_tsubo)}/坪</div>
+          <div class="label">平均坪単価</div>
+          <div class="value">${manYen(p.avg_price_per_tsubo)}<small>/坪</small></div>
+          <div class="range">レンジ：${manYen(p.min_price_per_tsubo)}〜${manYen(p.max_price_per_tsubo)}／㎡単価換算：約${manYen(p.avg_price_per_sqm)}/㎡</div>
         </div>
         <div class="figure">
           <div class="label">平均成約価格</div>
@@ -348,12 +327,12 @@ function render(p, cityName){
       <div class="samples">
         <h3>直近の成約事例（サンプル）</h3>
         <table>
-          <thead><tr><th>取引時期</th><th>種別</th><th>面積</th><th>成約価格</th><th>㎡単価</th></tr></thead>
-          <tbody>${rows || '<tr><td colspan="5">サンプルデータがありません</td></tr>'}</tbody>
+          <thead><tr><th>取引時期</th><th>種別</th><th>面積</th><th>建物面積</th><th>築年数</th><th>成約価格</th><th>坪単価</th></tr></thead>
+          <tbody>${rows || '<tr><td colspan="7">サンプルデータがありません</td></tr>'}</tbody>
         </table>
       </div>
       <div class="note">
-        本結果は国土交通省「不動産情報ライブラリ」で公開されている成約価格情報を統計的に集計した参考値です。㎡単価は「取引総額 ÷ 面積」で算出しています（土地・戸建は土地面積、マンションは専有面積を使用）。坪単価は㎡単価を1坪=3.305785㎡で換算した参考値です。個別物件の条件により実際の価格は変動します。正確な査定をご希望の方はお問い合わせください。
+        本結果は国土交通省「不動産情報ライブラリ」で公開されている成約価格情報を統計的に集計した参考値です。坪単価は「取引総額 ÷ 面積 × 3.305785」で算出しています（土地・戸建は土地面積、マンションは専有面積を使用）。地区名は町字単位で提供されており、丁目単位の絞り込みには対応していません。中古戸建の集計は、統計的に明らかな高額外れ値を除外しています。個別物件の条件により実際の価格は変動します。正確な査定をご希望の方はお問い合わせください。
       </div>
     </div>
   `;
