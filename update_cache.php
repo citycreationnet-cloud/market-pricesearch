@@ -141,15 +141,17 @@ function add_to_bucket(array &$bucket, array $sample): void
 }
 
 /**
- * IQR（四分位範囲）を使って、明らかに高額すぎる外れ値を除外する。
- * 「Q3（第3四分位数） + 1.5×IQR」を超える㎡単価のレコードを除外する、
+ * IQR（四分位範囲）を使って、指定したフィールドの外れ値を除外する。
+ * 「Q1 - 1.5×IQR」〜「Q3 + 1.5×IQR」の範囲外を外れ値とする、
  * 統計でよく使われる標準的な外れ値検出方法。
+ *
+ * @param string $tails 'upper'（高い側だけ除外）または 'both'（高い側・低い側の両方を除外）
  * サンプル数が5件未満の場合は統計的に不安定なため、除外を行わない。
  */
-function remove_high_price_outliers(array $records): array
+function remove_outliers_by_field(array $records, string $field, string $tails = 'both'): array
 {
     $values = array_values(array_filter(
-        array_map(fn ($r) => $r['price_per_sqm'], $records),
+        array_map(fn ($r) => $r[$field], $records),
         fn ($v) => $v !== null
     ));
 
@@ -162,11 +164,34 @@ function remove_high_price_outliers(array $records): array
     $q3 = percentile($values, 75);
     $iqr = $q3 - $q1;
     $upperBound = $q3 + 1.5 * $iqr;
+    $lowerBound = $q1 - 1.5 * $iqr;
 
-    return array_values(array_filter(
-        $records,
-        fn ($r) => $r['price_per_sqm'] === null || $r['price_per_sqm'] <= $upperBound
-    ));
+    return array_values(array_filter($records, function ($r) use ($field, $tails, $upperBound, $lowerBound) {
+        $v = $r[$field];
+        if ($v === null) {
+            return true; // 値が無いレコードは判定できないので残す
+        }
+        if (($tails === 'upper' || $tails === 'both') && $v > $upperBound) {
+            return false;
+        }
+        if (($tails === 'both') && $v < $lowerBound) {
+            return false;
+        }
+        return true;
+    }));
+}
+
+/**
+ * 複数フィールドについて、順番に外れ値除去を適用する。
+ * 例）['price_per_sqm' => 'both', 'area' => 'both'] なら、坪単価と面積の
+ * 両方について、高い側・低い側の外れ値を除外する。
+ */
+function remove_outliers(array $records, array $fieldTails): array
+{
+    foreach ($fieldTails as $field => $tails) {
+        $records = remove_outliers_by_field($records, $field, $tails);
+    }
+    return $records;
 }
 
 /**
@@ -188,13 +213,15 @@ function percentile(array $sortedValues, float $pct): float
  * レコード配列（1地区×1種別分）から、最終的な平均・レンジ等を計算する。
  * 坪単価は「㎡単価の平均 × 3.305785」で換算する。
  *
- * @param bool $removeOutliers true の場合、集計前に明らかな高額外れ値を除外する
- *                              （現在は「中古戸建」カテゴリのみ true で呼び出している）
+ * @param array $outlierFields 外れ値除去の対象フィールドと方向の指定。
+ *   例）['price_per_sqm' => 'upper'] … 中古戸建：高額側のみ除外
+ *       ['price_per_sqm' => 'both', 'area' => 'both'] … 土地：価格・面積とも両側除外
+ *   空配列（デフォルト）の場合は外れ値除去を行わない。
  */
-function finalize_bucket(array $records, bool $removeOutliers = false): array
+function finalize_bucket(array $records, array $outlierFields = []): array
 {
-    if ($removeOutliers) {
-        $records = remove_high_price_outliers($records);
+    if (!empty($outlierFields)) {
+        $records = remove_outliers($records, $outlierFields);
     }
 
     $sqmValues   = array_values(array_filter(array_map(fn ($r) => $r['price_per_sqm'], $records), fn ($v) => $v !== null));
@@ -264,8 +291,8 @@ function aggregate_by_district(array $records): array
     foreach ($byDistrict as $name => $buckets) {
         $result[$name] = [
             'all'     => finalize_bucket($buckets['all']),
-            'land'    => finalize_bucket($buckets['land']),
-            'house'   => finalize_bucket($buckets['house'], true), // ← 中古戸建のみ外れ値除去を適用
+            'land'    => finalize_bucket($buckets['land'], ['price_per_sqm' => 'both', 'area' => 'both']),
+            'house'   => finalize_bucket($buckets['house'], ['price_per_sqm' => 'upper']),
             'mansion' => finalize_bucket($buckets['mansion']),
         ];
     }
