@@ -1,59 +1,129 @@
 {
     "municipality_code": "14384",
     "municipality": "湯河原町",
-    "updated_at": "2026-07-09T05:36:05+00:00",
-    "raw_record_count": 315,
+    "updated_at": "2026-08-01T20:49:36+00:00",
+    "raw_record_count": 351,
     "districts": {
         "宮上": {
             "all": {
-                "count": 91,
-                "avg_price_per_sqm": 120644,
+                "count": 103,
+                "avg_price_per_sqm": 126352,
                 "min_price_per_sqm": 1053,
-                "max_price_per_sqm": 250000,
-                "avg_price_per_tsubo": 398824,
+                "max_price_per_sqm": 258824,
+                "avg_price_per_tsubo": 417692,
                 "min_price_per_tsubo": 3481,
-                "max_price_per_tsubo": 826446,
-                "avg_trade_price": 12520879,
+                "max_price_per_tsubo": 855616,
+                "avg_trade_price": 12507767,
                 "samples": [
                     {
-                        "period": "2025年第1四半期",
+                        "period": "2026年第1四半期",
                         "type": "宅地(土地と建物)",
+                        "trade_price": 6700000,
+                        "price_per_sqm": 70526,
+                        "price_per_tsubo": 233144,
+                        "area": 95,
+                        "structure": "木造",
+                        "building_year": "1988年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 14000000,
+                        "price_per_sqm": 215385,
+                        "price_per_tsubo": 712017,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "1988年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 13000000,
+                        "price_per_sqm": 216667,
+                        "price_per_tsubo": 716255,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1990年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 7500000,
+                        "price_per_sqm": 93750,
+                        "price_per_tsubo": 309917,
+                        "area": 80,
+                        "structure": "鉄骨造",
+                        "building_year": "2002年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 16000000,
+                        "price_per_sqm": 228571,
+                        "price_per_tsubo": 755607,
+                        "area": 70,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 6800000,
+                        "price_per_sqm": 97143,
+                        "price_per_tsubo": 321134,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2002年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 6000000,
+                        "price_per_sqm": 85714,
+                        "price_per_tsubo": 283352,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2002年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
                         "trade_price": 17000000,
-                        "price_per_sqm": 43590,
-                        "price_per_tsubo": 144099,
-                        "area": 390,
-                        "structure": "木造",
-                        "building_year": "1985年"
+                        "price_per_sqm": 242857,
+                        "price_per_tsubo": 802833,
+                        "area": 70,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
                     },
                     {
-                        "period": "2025年第1四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 18000000,
-                        "price_per_sqm": 64286,
-                        "price_per_tsubo": 212516,
-                        "area": 280,
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 22000000,
+                        "price_per_sqm": 258824,
+                        "price_per_tsubo": 855616,
+                        "area": 85,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 12000000,
+                        "price_per_sqm": 218182,
+                        "price_per_tsubo": 721263,
+                        "area": 55,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 22000000,
+                        "price_per_sqm": 258824,
+                        "price_per_tsubo": 855616,
+                        "area": 85,
                         "structure": "ＲＣ",
-                        "building_year": "1986年"
-                    },
-                    {
-                        "period": "2025年第1四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 10000000,
-                        "price_per_sqm": 26316,
-                        "price_per_tsubo": 86995,
-                        "area": 380,
-                        "structure": "ＲＣ",
-                        "building_year": "1969年"
-                    },
-                    {
-                        "period": "2025年第1四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 11000000,
-                        "price_per_sqm": 81481,
-                        "price_per_tsubo": 269359,
-                        "area": 135,
-                        "structure": "木造",
-                        "building_year": "1986年"
+                        "building_year": "2002年"
                     },
                     {
                         "period": "2025年第1四半期",
@@ -126,106 +196,36 @@
                         "building_year": "1992年"
                     },
                     {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 4300000,
-                        "price_per_sqm": 53750,
-                        "price_per_tsubo": 177686,
-                        "area": 80,
-                        "structure": "ＲＣ",
-                        "building_year": "1991年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 2700000,
-                        "price_per_sqm": 33750,
-                        "price_per_tsubo": 111570,
-                        "area": 80,
-                        "structure": "木造",
-                        "building_year": "1989年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 12000000,
-                        "price_per_sqm": 200000,
-                        "price_per_tsubo": 661157,
-                        "area": 60,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1992年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 11000000,
-                        "price_per_sqm": 183333,
-                        "price_per_tsubo": 606059,
-                        "area": 60,
-                        "structure": "ＲＣ",
-                        "building_year": "2024年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 8300000,
-                        "price_per_sqm": 150909,
-                        "price_per_tsubo": 498873,
-                        "area": 55,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1993年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 8500000,
-                        "price_per_sqm": 121429,
-                        "price_per_tsubo": 401418,
-                        "area": 70,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1993年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
+                        "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
-                        "trade_price": 11000000,
-                        "price_per_sqm": 169231,
-                        "price_per_tsubo": 559441,
-                        "area": 65,
+                        "trade_price": 17000000,
+                        "price_per_sqm": 43590,
+                        "price_per_tsubo": 144099,
+                        "area": 390,
                         "structure": "木造",
-                        "building_year": "1995年"
+                        "building_year": "1985年"
                     },
                     {
-                        "period": "2025年第2四半期",
-                        "type": "宅地(土地)",
-                        "trade_price": 4100000,
-                        "price_per_sqm": 27333,
-                        "price_per_tsubo": 90357,
-                        "area": 150,
-                        "structure": "",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "宅地(土地)",
-                        "trade_price": 3900000,
-                        "price_per_sqm": 4194,
-                        "price_per_tsubo": 13864,
-                        "area": 930,
-                        "structure": "",
-                        "building_year": ""
+                        "period": "2025年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 18000000,
+                        "price_per_sqm": 64286,
+                        "price_per_tsubo": 212516,
+                        "area": 280,
+                        "structure": "ＲＣ",
+                        "building_year": "1986年"
                     }
                 ]
             },
             "land": {
-                "count": 8,
-                "avg_price_per_sqm": 21639,
+                "count": 9,
+                "avg_price_per_sqm": 24698,
                 "min_price_per_sqm": 1852,
-                "max_price_per_sqm": 38095,
-                "avg_price_per_tsubo": 71533,
+                "max_price_per_sqm": 49167,
+                "avg_price_per_tsubo": 81645,
                 "min_price_per_tsubo": 6122,
-                "max_price_per_tsubo": 125934,
-                "avg_trade_price": 6587500,
+                "max_price_per_tsubo": 162536,
+                "avg_trade_price": 6511111,
                 "samples": [
                     {
                         "period": "2025年第2四半期",
@@ -254,6 +254,16 @@
                         "price_per_sqm": 36154,
                         "price_per_tsubo": 119517,
                         "area": 260,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 5900000,
+                        "price_per_sqm": 49167,
+                        "price_per_tsubo": 162536,
+                        "area": 120,
                         "structure": "",
                         "building_year": ""
                     },
@@ -310,15 +320,25 @@
                 ]
             },
             "house": {
-                "count": 26,
-                "avg_price_per_sqm": 64663,
+                "count": 27,
+                "avg_price_per_sqm": 64880,
                 "min_price_per_sqm": 1053,
                 "max_price_per_sqm": 214286,
-                "avg_price_per_tsubo": 213762,
+                "avg_price_per_tsubo": 214480,
                 "min_price_per_tsubo": 3481,
                 "max_price_per_tsubo": 708383,
-                "avg_trade_price": 19192308,
+                "avg_trade_price": 18729630,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 6700000,
+                        "price_per_sqm": 70526,
+                        "price_per_tsubo": 233144,
+                        "area": 95,
+                        "structure": "木造",
+                        "building_year": "1988年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
@@ -508,29 +528,119 @@
                         "area": 145,
                         "structure": "木造",
                         "building_year": "1966年"
-                    },
-                    {
-                        "period": "2023年第2四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 29000000,
-                        "price_per_sqm": 2900,
-                        "price_per_tsubo": 9587,
-                        "area": 9999,
-                        "structure": "木造",
-                        "building_year": "2023年"
                     }
                 ]
             },
             "mansion": {
-                "count": 57,
-                "avg_price_per_sqm": 160075,
+                "count": 67,
+                "avg_price_per_sqm": 164779,
                 "min_price_per_sqm": 33750,
-                "max_price_per_sqm": 250000,
-                "avg_price_per_tsubo": 529173,
+                "max_price_per_sqm": 258824,
+                "avg_price_per_tsubo": 544724,
                 "min_price_per_tsubo": 111570,
-                "max_price_per_tsubo": 826446,
-                "avg_trade_price": 10310526,
+                "max_price_per_tsubo": 855616,
+                "avg_trade_price": 10805970,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 14000000,
+                        "price_per_sqm": 215385,
+                        "price_per_tsubo": 712017,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "1988年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 13000000,
+                        "price_per_sqm": 216667,
+                        "price_per_tsubo": 716255,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1990年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 7500000,
+                        "price_per_sqm": 93750,
+                        "price_per_tsubo": 309917,
+                        "area": 80,
+                        "structure": "鉄骨造",
+                        "building_year": "2002年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 16000000,
+                        "price_per_sqm": 228571,
+                        "price_per_tsubo": 755607,
+                        "area": 70,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 6800000,
+                        "price_per_sqm": 97143,
+                        "price_per_tsubo": 321134,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2002年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 6000000,
+                        "price_per_sqm": 85714,
+                        "price_per_tsubo": 283352,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2002年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 17000000,
+                        "price_per_sqm": 242857,
+                        "price_per_tsubo": 802833,
+                        "area": 70,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 22000000,
+                        "price_per_sqm": 258824,
+                        "price_per_tsubo": 855616,
+                        "area": 85,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 12000000,
+                        "price_per_sqm": 218182,
+                        "price_per_tsubo": 721263,
+                        "area": 55,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 22000000,
+                        "price_per_sqm": 258824,
+                        "price_per_tsubo": 855616,
+                        "area": 85,
+                        "structure": "ＲＣ",
+                        "building_year": "2002年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "中古マンション等",
@@ -630,121 +740,61 @@
                         "area": 60,
                         "structure": "ＳＲＣ",
                         "building_year": "1992年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 11000000,
-                        "price_per_sqm": 183333,
-                        "price_per_tsubo": 606059,
-                        "area": 60,
-                        "structure": "ＲＣ",
-                        "building_year": "2024年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 8300000,
-                        "price_per_sqm": 150909,
-                        "price_per_tsubo": 498873,
-                        "area": 55,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1993年"
-                    },
-                    {
-                        "period": "2025年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 8500000,
-                        "price_per_sqm": 121429,
-                        "price_per_tsubo": 401418,
-                        "area": 70,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1993年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 6800000,
-                        "price_per_sqm": 97143,
-                        "price_per_tsubo": 321134,
-                        "area": 70,
-                        "structure": "ＲＣ",
-                        "building_year": "2002年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 7200000,
-                        "price_per_sqm": 120000,
-                        "price_per_tsubo": 396694,
-                        "area": 60,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1988年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 7000000,
-                        "price_per_sqm": 100000,
-                        "price_per_tsubo": 330579,
-                        "area": 70,
-                        "structure": "ＲＣ",
-                        "building_year": "2002年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 13000000,
-                        "price_per_sqm": 162500,
-                        "price_per_tsubo": 537190,
-                        "area": 80,
-                        "structure": "ＲＣ",
-                        "building_year": "1990年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 7500000,
-                        "price_per_sqm": 125000,
-                        "price_per_tsubo": 413223,
-                        "area": 60,
-                        "structure": "ＲＣ",
-                        "building_year": "1990年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 11000000,
-                        "price_per_sqm": 169231,
-                        "price_per_tsubo": 559441,
-                        "area": 65,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1988年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 7000000,
-                        "price_per_sqm": 175000,
-                        "price_per_tsubo": 578512,
-                        "area": 40,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1993年"
                     }
                 ]
             }
         },
         "吉浜": {
             "all": {
-                "count": 73,
-                "avg_price_per_sqm": 164383,
+                "count": 77,
+                "avg_price_per_sqm": 160592,
                 "min_price_per_sqm": 800,
                 "max_price_per_sqm": 788235,
-                "avg_price_per_tsubo": 543414,
+                "avg_price_per_tsubo": 530884,
                 "min_price_per_tsubo": 2645,
                 "max_price_per_tsubo": 2605735,
-                "avg_trade_price": 17626027,
+                "avg_trade_price": 17158442,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 8700000,
+                        "price_per_sqm": 28065,
+                        "price_per_tsubo": 92777,
+                        "area": 310,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 3000000,
+                        "price_per_sqm": 50000,
+                        "price_per_tsubo": 165289,
+                        "area": 60,
+                        "structure": "ＲＣ",
+                        "building_year": "1991年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 13000000,
+                        "price_per_sqm": 136842,
+                        "price_per_tsubo": 452370,
+                        "area": 95,
+                        "structure": "ＲＣ",
+                        "building_year": "1991年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 9800000,
+                        "price_per_sqm": 150769,
+                        "price_per_tsubo": 498410,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "1992年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
@@ -904,59 +954,29 @@
                         "area": 70,
                         "structure": "ＲＣ",
                         "building_year": "1992年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 9800000,
-                        "price_per_sqm": 178182,
-                        "price_per_tsubo": 589031,
-                        "area": 55,
-                        "structure": "ＲＣ",
-                        "building_year": "1990年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 38000000,
-                        "price_per_sqm": 422222,
-                        "price_per_tsubo": 1395775,
-                        "area": 90,
-                        "structure": "ＲＣ",
-                        "building_year": "2009年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 13000000,
-                        "price_per_sqm": 162500,
-                        "price_per_tsubo": 537190,
-                        "area": 80,
-                        "structure": "ＲＣ",
-                        "building_year": "1992年"
-                    },
-                    {
-                        "period": "2025年第4四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 5000000,
-                        "price_per_sqm": 34483,
-                        "price_per_tsubo": 113993,
-                        "area": 145,
-                        "structure": "木造",
-                        "building_year": "1978年"
                     }
                 ]
             },
             "land": {
-                "count": 10,
-                "avg_price_per_sqm": 41598,
+                "count": 11,
+                "avg_price_per_sqm": 40368,
                 "min_price_per_sqm": 6479,
                 "max_price_per_sqm": 71429,
-                "avg_price_per_tsubo": 137514,
+                "avg_price_per_tsubo": 133447,
                 "min_price_per_tsubo": 21418,
                 "max_price_per_tsubo": 236129,
-                "avg_trade_price": 15730000,
+                "avg_trade_price": 15090909,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 8700000,
+                        "price_per_sqm": 28065,
+                        "price_per_tsubo": 92777,
+                        "area": 310,
+                        "structure": "",
+                        "building_year": ""
+                    },
                     {
                         "period": "2025年第2四半期",
                         "type": "宅地(土地)",
@@ -1192,16 +1212,6 @@
                     {
                         "period": "2024年第2四半期",
                         "type": "宅地(土地と建物)",
-                        "trade_price": 9800000,
-                        "price_per_sqm": 93333,
-                        "price_per_tsubo": 308539,
-                        "area": 105,
-                        "structure": "木造",
-                        "building_year": "1991年"
-                    },
-                    {
-                        "period": "2024年第2四半期",
-                        "type": "宅地(土地と建物)",
                         "trade_price": 18000000,
                         "price_per_sqm": 69231,
                         "price_per_tsubo": 228863,
@@ -1226,6 +1236,16 @@
                         "price_per_sqm": 72727,
                         "price_per_tsubo": 240420,
                         "area": 165,
+                        "structure": "木造",
+                        "building_year": "1991年"
+                    },
+                    {
+                        "period": "2024年第2四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 9800000,
+                        "price_per_sqm": 93333,
+                        "price_per_tsubo": 308539,
+                        "area": 105,
                         "structure": "木造",
                         "building_year": "1991年"
                     },
@@ -1272,15 +1292,45 @@
                 ]
             },
             "mansion": {
-                "count": 33,
-                "avg_price_per_sqm": 289722,
-                "min_price_per_sqm": 67500,
+                "count": 36,
+                "avg_price_per_sqm": 274957,
+                "min_price_per_sqm": 50000,
                 "max_price_per_sqm": 788235,
-                "avg_price_per_tsubo": 957759,
-                "min_price_per_tsubo": 223140,
+                "avg_price_per_tsubo": 908948,
+                "min_price_per_tsubo": 165289,
                 "max_price_per_tsubo": 2605735,
-                "avg_trade_price": 22578788,
+                "avg_trade_price": 21413889,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 3000000,
+                        "price_per_sqm": 50000,
+                        "price_per_tsubo": 165289,
+                        "area": 60,
+                        "structure": "ＲＣ",
+                        "building_year": "1991年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 13000000,
+                        "price_per_sqm": 136842,
+                        "price_per_tsubo": 452370,
+                        "area": 95,
+                        "structure": "ＲＣ",
+                        "building_year": "1991年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 9800000,
+                        "price_per_sqm": 150769,
+                        "price_per_tsubo": 498410,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "1992年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "中古マンション等",
@@ -1434,36 +1484,6 @@
                     {
                         "period": "2024年第1四半期",
                         "type": "中古マンション等",
-                        "trade_price": 8300000,
-                        "price_per_sqm": 118571,
-                        "price_per_tsubo": 391970,
-                        "area": 70,
-                        "structure": "ＲＣ",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2024年第1四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 5300000,
-                        "price_per_sqm": 151429,
-                        "price_per_tsubo": 500592,
-                        "area": 35,
-                        "structure": "",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2024年第1四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 9500000,
-                        "price_per_sqm": 146154,
-                        "price_per_tsubo": 483154,
-                        "area": 65,
-                        "structure": "ＲＣ",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2024年第1四半期",
-                        "type": "中古マンション等",
                         "trade_price": 10000000,
                         "price_per_sqm": 166667,
                         "price_per_tsubo": 550965,
@@ -1486,34 +1506,64 @@
         },
         "土肥": {
             "all": {
-                "count": 60,
-                "avg_price_per_sqm": 255214,
+                "count": 67,
+                "avg_price_per_sqm": 256426,
                 "min_price_per_sqm": 66667,
                 "max_price_per_sqm": 585714,
-                "avg_price_per_tsubo": 843681,
+                "avg_price_per_tsubo": 847689,
                 "min_price_per_tsubo": 220387,
                 "max_price_per_tsubo": 1936245,
-                "avg_trade_price": 22126667,
+                "avg_trade_price": 22214925,
                 "samples": [
                     {
-                        "period": "2025年第1四半期",
-                        "type": "宅地(土地)",
-                        "trade_price": 20000000,
-                        "price_per_sqm": 80000,
-                        "price_per_tsubo": 264463,
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 23000000,
+                        "price_per_sqm": 92000,
+                        "price_per_tsubo": 304132,
                         "area": 250,
-                        "structure": "",
-                        "building_year": ""
+                        "structure": "木造",
+                        "building_year": "1985年"
                     },
                     {
-                        "period": "2025年第1四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 10000000,
-                        "price_per_sqm": 66667,
-                        "price_per_tsubo": 220387,
-                        "area": 150,
-                        "structure": "木造",
-                        "building_year": "1970年"
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 19000000,
+                        "price_per_sqm": 292308,
+                        "price_per_tsubo": 966307,
+                        "area": 65,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 7800000,
+                        "price_per_sqm": 173333,
+                        "price_per_tsubo": 573002,
+                        "area": 45,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1989年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 30000000,
+                        "price_per_sqm": 545455,
+                        "price_per_tsubo": 1803157,
+                        "area": 55,
+                        "structure": "ＲＣ",
+                        "building_year": "2000年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 36000000,
+                        "price_per_sqm": 514286,
+                        "price_per_tsubo": 1700119,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2007年"
                     },
                     {
                         "period": "2025年第1四半期",
@@ -1564,6 +1614,26 @@
                         "area": 65,
                         "structure": "ＳＲＣ",
                         "building_year": "1993年"
+                    },
+                    {
+                        "period": "2025年第1四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 20000000,
+                        "price_per_sqm": 80000,
+                        "price_per_tsubo": 264463,
+                        "area": 250,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2025年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 10000000,
+                        "price_per_sqm": 66667,
+                        "price_per_tsubo": 220387,
+                        "area": 150,
+                        "structure": "木造",
+                        "building_year": "1970年"
                     },
                     {
                         "period": "2025年第2四半期",
@@ -1644,56 +1714,6 @@
                         "area": 210,
                         "structure": "",
                         "building_year": ""
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 5500000,
-                        "price_per_sqm": 100000,
-                        "price_per_tsubo": 330579,
-                        "area": 55,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1980年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 38000000,
-                        "price_per_sqm": 542857,
-                        "price_per_tsubo": 1794569,
-                        "area": 70,
-                        "structure": "ＲＣ",
-                        "building_year": "2007年"
-                    },
-                    {
-                        "period": "2025年第3四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 8000000,
-                        "price_per_sqm": 177778,
-                        "price_per_tsubo": 587696,
-                        "area": 45,
-                        "structure": "木造",
-                        "building_year": "1991年"
-                    },
-                    {
-                        "period": "2025年第4四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 4800000,
-                        "price_per_sqm": 120000,
-                        "price_per_tsubo": 396694,
-                        "area": 40,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1980年"
-                    },
-                    {
-                        "period": "2025年第4四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 9800000,
-                        "price_per_sqm": 140000,
-                        "price_per_tsubo": 462810,
-                        "area": 70,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1989年"
                     }
                 ]
             },
@@ -1790,15 +1810,25 @@
                 ]
             },
             "house": {
-                "count": 11,
-                "avg_price_per_sqm": 110262,
+                "count": 14,
+                "avg_price_per_sqm": 111088,
                 "min_price_per_sqm": 66667,
                 "max_price_per_sqm": 200000,
-                "avg_price_per_tsubo": 364503,
+                "avg_price_per_tsubo": 367233,
                 "min_price_per_tsubo": 220387,
                 "max_price_per_tsubo": 661157,
-                "avg_trade_price": 23590909,
+                "avg_trade_price": 23392857,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 23000000,
+                        "price_per_sqm": 92000,
+                        "price_per_tsubo": 304132,
+                        "area": 250,
+                        "structure": "木造",
+                        "building_year": "1985年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
@@ -1828,6 +1858,26 @@
                         "area": 490,
                         "structure": "鉄骨造",
                         "building_year": "1986年"
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 23000000,
+                        "price_per_sqm": 131429,
+                        "price_per_tsubo": 434476,
+                        "area": 175,
+                        "structure": "木造",
+                        "building_year": "1966年"
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 22000000,
+                        "price_per_sqm": 118919,
+                        "price_per_tsubo": 393121,
+                        "area": 185,
+                        "structure": "木造",
+                        "building_year": "1968年"
                     },
                     {
                         "period": "2024年第1四半期",
@@ -1912,15 +1962,55 @@
                 ]
             },
             "mansion": {
-                "count": 41,
-                "avg_price_per_sqm": 324679,
+                "count": 45,
+                "avg_price_per_sqm": 329716,
                 "min_price_per_sqm": 80000,
                 "max_price_per_sqm": 585714,
-                "avg_price_per_tsubo": 1073319,
+                "avg_price_per_tsubo": 1089970,
                 "min_price_per_tsubo": 264463,
                 "max_price_per_tsubo": 1936245,
-                "avg_trade_price": 21417073,
+                "avg_trade_price": 21575556,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 19000000,
+                        "price_per_sqm": 292308,
+                        "price_per_tsubo": 966307,
+                        "area": 65,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1993年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 7800000,
+                        "price_per_sqm": 173333,
+                        "price_per_tsubo": 573002,
+                        "area": 45,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1989年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 30000000,
+                        "price_per_sqm": 545455,
+                        "price_per_tsubo": 1803157,
+                        "area": 55,
+                        "structure": "ＲＣ",
+                        "building_year": "2000年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 36000000,
+                        "price_per_sqm": 514286,
+                        "price_per_tsubo": 1700119,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2007年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "中古マンション等",
@@ -2080,61 +2170,61 @@
                         "area": 25,
                         "structure": "ＳＲＣ",
                         "building_year": "1991年"
-                    },
-                    {
-                        "period": "2025年第4四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 39000000,
-                        "price_per_sqm": 487500,
-                        "price_per_tsubo": 1611570,
-                        "area": 80,
-                        "structure": "ＲＣ",
-                        "building_year": "2007年"
-                    },
-                    {
-                        "period": "2024年第1四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 39000000,
-                        "price_per_sqm": 458824,
-                        "price_per_tsubo": 1516773,
-                        "area": 85,
-                        "structure": "",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2024年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 6000000,
-                        "price_per_sqm": 80000,
-                        "price_per_tsubo": 264463,
-                        "area": 75,
-                        "structure": "ＲＣ",
-                        "building_year": "1980年"
-                    },
-                    {
-                        "period": "2024年第2四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 33000000,
-                        "price_per_sqm": 440000,
-                        "price_per_tsubo": 1454545,
-                        "area": 75,
-                        "structure": "ＲＣ",
-                        "building_year": ""
                     }
                 ]
             }
         },
         "中央": {
             "all": {
-                "count": 33,
-                "avg_price_per_sqm": 163617,
+                "count": 37,
+                "avg_price_per_sqm": 171455,
                 "min_price_per_sqm": 28003,
                 "max_price_per_sqm": 314286,
-                "avg_price_per_tsubo": 540884,
+                "avg_price_per_tsubo": 566792,
                 "min_price_per_tsubo": 92572,
                 "max_price_per_tsubo": 1038962,
-                "avg_trade_price": 29996970,
+                "avg_trade_price": 28213514,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 8000000,
+                        "price_per_sqm": 177778,
+                        "price_per_tsubo": 587696,
+                        "area": 45,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1992年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 16000000,
+                        "price_per_sqm": 266667,
+                        "price_per_tsubo": 881544,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1977年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 15000000,
+                        "price_per_sqm": 250000,
+                        "price_per_tsubo": 826446,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1977年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 15000000,
+                        "price_per_sqm": 250000,
+                        "price_per_tsubo": 826446,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1977年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
@@ -2294,46 +2384,6 @@
                         "area": 150,
                         "structure": "木造",
                         "building_year": "2023年"
-                    },
-                    {
-                        "period": "2024年第4四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 11000000,
-                        "price_per_sqm": 157143,
-                        "price_per_tsubo": 519481,
-                        "area": 70,
-                        "structure": "ＳＲＣ",
-                        "building_year": "1992年"
-                    },
-                    {
-                        "period": "2024年第4四半期",
-                        "type": "中古マンション等",
-                        "trade_price": 14000000,
-                        "price_per_sqm": 186667,
-                        "price_per_tsubo": 617081,
-                        "area": 75,
-                        "structure": "",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2024年第4四半期",
-                        "type": "宅地(土地)",
-                        "trade_price": 14000000,
-                        "price_per_sqm": 90323,
-                        "price_per_tsubo": 298588,
-                        "area": 155,
-                        "structure": "",
-                        "building_year": ""
-                    },
-                    {
-                        "period": "2024年第4四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 38000000,
-                        "price_per_sqm": 86364,
-                        "price_per_tsubo": 285501,
-                        "area": 440,
-                        "structure": "木造",
-                        "building_year": "1989年"
                     }
                 ]
             },
@@ -2532,15 +2582,55 @@
                 ]
             },
             "mansion": {
-                "count": 16,
-                "avg_price_per_sqm": 186337,
+                "count": 20,
+                "avg_price_per_sqm": 196292,
                 "min_price_per_sqm": 37333,
                 "max_price_per_sqm": 314286,
-                "avg_price_per_tsubo": 615989,
+                "avg_price_per_tsubo": 648898,
                 "min_price_per_tsubo": 123415,
                 "max_price_per_tsubo": 1038962,
-                "avg_trade_price": 10881250,
+                "avg_trade_price": 11405000,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 8000000,
+                        "price_per_sqm": 177778,
+                        "price_per_tsubo": 587696,
+                        "area": 45,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1992年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 16000000,
+                        "price_per_sqm": 266667,
+                        "price_per_tsubo": 881544,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1977年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 15000000,
+                        "price_per_sqm": 250000,
+                        "price_per_tsubo": 826446,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1977年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 15000000,
+                        "price_per_sqm": 250000,
+                        "price_per_tsubo": 826446,
+                        "area": 60,
+                        "structure": "ＳＲＣ",
+                        "building_year": "1977年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "中古マンション等",
@@ -2706,15 +2796,25 @@
         },
         "鍛冶屋": {
             "all": {
-                "count": 27,
-                "avg_price_per_sqm": 78390,
+                "count": 28,
+                "avg_price_per_sqm": 76964,
                 "min_price_per_sqm": 5556,
                 "max_price_per_sqm": 220000,
-                "avg_price_per_tsubo": 259140,
+                "avg_price_per_tsubo": 254426,
                 "min_price_per_tsubo": 18367,
                 "max_price_per_tsubo": 727273,
-                "avg_trade_price": 11511111,
+                "avg_trade_price": 11189286,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 2500000,
+                        "price_per_sqm": 38462,
+                        "price_per_tsubo": 127147,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "1990年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
@@ -2837,16 +2937,6 @@
                     },
                     {
                         "period": "2024年第1四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 7800000,
-                        "price_per_sqm": 78000,
-                        "price_per_tsubo": 257851,
-                        "area": 100,
-                        "structure": "木造",
-                        "building_year": "1988年"
-                    },
-                    {
-                        "period": "2024年第1四半期",
                         "type": "中古マンション等",
                         "trade_price": 9500000,
                         "price_per_sqm": 135714,
@@ -2854,6 +2944,16 @@
                         "area": 70,
                         "structure": "",
                         "building_year": ""
+                    },
+                    {
+                        "period": "2024年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 7800000,
+                        "price_per_sqm": 78000,
+                        "price_per_tsubo": 257851,
+                        "area": 100,
+                        "structure": "木造",
+                        "building_year": "1988年"
                     },
                     {
                         "period": "2024年第2四半期",
@@ -2904,16 +3004,6 @@
                         "area": 65,
                         "structure": "",
                         "building_year": ""
-                    },
-                    {
-                        "period": "2024年第4四半期",
-                        "type": "宅地(土地と建物)",
-                        "trade_price": 15000000,
-                        "price_per_sqm": 37500,
-                        "price_per_tsubo": 123967,
-                        "area": 400,
-                        "structure": "ＲＣ",
-                        "building_year": "1989年"
                     }
                 ]
             },
@@ -3102,15 +3192,25 @@
                 ]
             },
             "mansion": {
-                "count": 11,
-                "avg_price_per_sqm": 86026,
+                "count": 12,
+                "avg_price_per_sqm": 82062,
                 "min_price_per_sqm": 24286,
                 "max_price_per_sqm": 175000,
-                "avg_price_per_tsubo": 284383,
+                "avg_price_per_tsubo": 271280,
                 "min_price_per_tsubo": 80284,
                 "max_price_per_tsubo": 578512,
-                "avg_trade_price": 5836364,
+                "avg_trade_price": 5558333,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 2500000,
+                        "price_per_sqm": 38462,
+                        "price_per_tsubo": 127147,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "1990年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "中古マンション等",
@@ -3226,15 +3326,35 @@
         },
         "宮下": {
             "all": {
-                "count": 11,
-                "avg_price_per_sqm": 56630,
+                "count": 17,
+                "avg_price_per_sqm": 71467,
                 "min_price_per_sqm": 667,
                 "max_price_per_sqm": 294118,
-                "avg_price_per_tsubo": 187206,
+                "avg_price_per_tsubo": 236254,
                 "min_price_per_tsubo": 2205,
                 "max_price_per_tsubo": 972291,
-                "avg_trade_price": 6490909,
+                "avg_trade_price": 18670588,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 20000000,
+                        "price_per_sqm": 58824,
+                        "price_per_tsubo": 194459,
+                        "area": 340,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 10000000,
+                        "price_per_sqm": 90909,
+                        "price_per_tsubo": 300526,
+                        "area": 110,
+                        "structure": "木造",
+                        "building_year": "1984年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地)",
@@ -3286,14 +3406,44 @@
                         "building_year": "1991年"
                     },
                     {
-                        "period": "2024年第1四半期",
+                        "period": "2025年第4四半期",
                         "type": "宅地(土地と建物)",
-                        "trade_price": 4500000,
-                        "price_per_sqm": 69231,
-                        "price_per_tsubo": 228863,
-                        "area": 65,
+                        "trade_price": 20000000,
+                        "price_per_sqm": 90909,
+                        "price_per_tsubo": 300526,
+                        "area": 220,
                         "structure": "木造",
-                        "building_year": "1973年"
+                        "building_year": "2011年"
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 11000000,
+                        "price_per_sqm": 95652,
+                        "price_per_tsubo": 316205,
+                        "area": 115,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 15000000,
+                        "price_per_sqm": 85714,
+                        "price_per_tsubo": 283352,
+                        "area": 175,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 170000000,
+                        "price_per_sqm": 170000,
+                        "price_per_tsubo": 561983,
+                        "area": 1000,
+                        "structure": "",
+                        "building_year": ""
                     },
                     {
                         "period": "2024年第1四半期",
@@ -3304,6 +3454,16 @@
                         "area": 85,
                         "structure": "木造",
                         "building_year": "2015年"
+                    },
+                    {
+                        "period": "2024年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 4500000,
+                        "price_per_sqm": 69231,
+                        "price_per_tsubo": 228863,
+                        "area": 65,
+                        "structure": "木造",
+                        "building_year": "1973年"
                     },
                     {
                         "period": "2023年第1四半期",
@@ -3348,15 +3508,25 @@
                 ]
             },
             "land": {
-                "count": 5,
-                "avg_price_per_sqm": 15258,
+                "count": 9,
+                "avg_price_per_sqm": 54053,
                 "min_price_per_sqm": 667,
-                "max_price_per_sqm": 27273,
-                "avg_price_per_tsubo": 50440,
+                "max_price_per_sqm": 170000,
+                "avg_price_per_tsubo": 178689,
                 "min_price_per_tsubo": 2205,
-                "max_price_per_tsubo": 90159,
-                "avg_trade_price": 3720000,
+                "max_price_per_tsubo": 561983,
+                "avg_trade_price": 26066667,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 20000000,
+                        "price_per_sqm": 58824,
+                        "price_per_tsubo": 194459,
+                        "area": 340,
+                        "structure": "",
+                        "building_year": ""
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地)",
@@ -3388,6 +3558,36 @@
                         "building_year": ""
                     },
                     {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 11000000,
+                        "price_per_sqm": 95652,
+                        "price_per_tsubo": 316205,
+                        "area": 115,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 15000000,
+                        "price_per_sqm": 85714,
+                        "price_per_tsubo": 283352,
+                        "area": 175,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
+                        "period": "2025年第4四半期",
+                        "type": "宅地(土地)",
+                        "trade_price": 170000000,
+                        "price_per_sqm": 170000,
+                        "price_per_tsubo": 561983,
+                        "area": 1000,
+                        "structure": "",
+                        "building_year": ""
+                    },
+                    {
                         "period": "2023年第2四半期",
                         "type": "宅地(土地)",
                         "trade_price": 4900000,
@@ -3410,15 +3610,25 @@
                 ]
             },
             "house": {
-                "count": 5,
-                "avg_price_per_sqm": 97328,
+                "count": 7,
+                "avg_price_per_sqm": 95494,
                 "min_price_per_sqm": 13333,
                 "max_price_per_sqm": 294118,
-                "avg_price_per_tsubo": 321744,
+                "avg_price_per_tsubo": 315682,
                 "min_price_per_tsubo": 44076,
                 "max_price_per_tsubo": 972291,
-                "avg_trade_price": 9960000,
+                "avg_trade_price": 11400000,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 10000000,
+                        "price_per_sqm": 90909,
+                        "price_per_tsubo": 300526,
+                        "area": 110,
+                        "structure": "木造",
+                        "building_year": "1984年"
+                    },
                     {
                         "period": "2025年第1四半期",
                         "type": "宅地(土地と建物)",
@@ -3430,14 +3640,14 @@
                         "building_year": "1970年"
                     },
                     {
-                        "period": "2024年第1四半期",
+                        "period": "2025年第4四半期",
                         "type": "宅地(土地と建物)",
-                        "trade_price": 4500000,
-                        "price_per_sqm": 69231,
-                        "price_per_tsubo": 228863,
-                        "area": 65,
+                        "trade_price": 20000000,
+                        "price_per_sqm": 90909,
+                        "price_per_tsubo": 300526,
+                        "area": 220,
                         "structure": "木造",
-                        "building_year": "1973年"
+                        "building_year": "2011年"
                     },
                     {
                         "period": "2024年第1四半期",
@@ -3448,6 +3658,16 @@
                         "area": 85,
                         "structure": "木造",
                         "building_year": "2015年"
+                    },
+                    {
+                        "period": "2024年第1四半期",
+                        "type": "宅地(土地と建物)",
+                        "trade_price": 4500000,
+                        "price_per_sqm": 69231,
+                        "price_per_tsubo": 228863,
+                        "area": 65,
+                        "structure": "木造",
+                        "building_year": "1973年"
                     },
                     {
                         "period": "2023年第1四半期",
@@ -3725,15 +3945,35 @@
         },
         "城堀": {
             "all": {
-                "count": 6,
-                "avg_price_per_sqm": 261993,
+                "count": 8,
+                "avg_price_per_sqm": 371083,
                 "min_price_per_sqm": 24561,
-                "max_price_per_sqm": 716667,
-                "avg_price_per_tsubo": 866093,
+                "max_price_per_sqm": 753846,
+                "avg_price_per_tsubo": 1226719,
                 "min_price_per_tsubo": 81193,
-                "max_price_per_tsubo": 2369147,
-                "avg_trade_price": 25833333,
+                "max_price_per_tsubo": 2492053,
+                "avg_trade_price": 31125000,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 45000000,
+                        "price_per_sqm": 642857,
+                        "price_per_tsubo": 2125147,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2009年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 49000000,
+                        "price_per_sqm": 753846,
+                        "price_per_tsubo": 2492053,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "2009年"
+                    },
                     {
                         "period": "2025年第4四半期",
                         "type": "宅地(土地と建物)",
@@ -3860,15 +4100,35 @@
                 ]
             },
             "mansion": {
-                "count": 2,
-                "avg_price_per_sqm": 658334,
+                "count": 4,
+                "avg_price_per_sqm": 678343,
                 "min_price_per_sqm": 600000,
-                "max_price_per_sqm": 716667,
-                "avg_price_per_tsubo": 2176309,
+                "max_price_per_sqm": 753846,
+                "avg_price_per_tsubo": 2242454,
                 "min_price_per_tsubo": 1983471,
-                "max_price_per_tsubo": 2369147,
-                "avg_trade_price": 45500000,
+                "max_price_per_tsubo": 2492053,
+                "avg_trade_price": 46250000,
                 "samples": [
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 45000000,
+                        "price_per_sqm": 642857,
+                        "price_per_tsubo": 2125147,
+                        "area": 70,
+                        "structure": "ＲＣ",
+                        "building_year": "2009年"
+                    },
+                    {
+                        "period": "2026年第1四半期",
+                        "type": "中古マンション等",
+                        "trade_price": 49000000,
+                        "price_per_sqm": 753846,
+                        "price_per_tsubo": 2492053,
+                        "area": 65,
+                        "structure": "ＲＣ",
+                        "building_year": "2009年"
+                    },
                     {
                         "period": "2024年第1四半期",
                         "type": "中古マンション等",
