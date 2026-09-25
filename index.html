@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>エリア相場検索｜成約事例に基づく価格の目安</title>
+<title>エリア相場検索｜取引価格情報に基づく価格の目安</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -17,6 +17,8 @@
     --ink:#20242c;
     --ink-soft:#5b6472;
     --line:#dcd6c8;
+    --warn-bg:#fbf1e6;
+    --warn-text:#8f5a1f;
   }
   *{box-sizing:border-box;}
   body{
@@ -38,7 +40,7 @@
 
   .search-card{
     background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:24px;
-    display:grid;grid-template-columns:1.1fr 1.1fr 1fr auto;gap:16px;align-items:end;
+    display:grid;grid-template-columns:1fr 1fr 1.1fr auto;gap:16px;align-items:end;
     box-shadow:0 1px 2px rgba(22,35,61,.04);
   }
   @media (max-width:820px){ .search-card{grid-template-columns:1fr 1fr;} button.go{grid-column:1/-1;} }
@@ -68,7 +70,17 @@
   }
   .result-head .place{font-family:'Noto Serif JP',serif;font-size:19px;}
   .result-head .place b{color:var(--brass);font-weight:700;}
-  .result-head .updated{font-size:11.5px;color:#c6cedc;}
+  .result-head .updated{font-size:11.5px;color:#c6cedc;text-align:right;line-height:1.6;}
+
+  .period-line{
+    padding:10px 24px;font-size:12px;color:var(--ink-soft);
+    background:#faf8f2;border-bottom:1px solid var(--line);
+  }
+
+  .reliability-note{
+    margin:16px 24px 0;padding:10px 14px;background:var(--warn-bg);color:var(--warn-text);
+    font-size:12.5px;border-radius:3px;border:1px solid #e8d3b0;
+  }
 
   .figures{display:grid;grid-template-columns:1.3fr 1fr 1fr;border-bottom:1px solid var(--line);}
   @media (max-width:640px){ .figures{grid-template-columns:1fr;} }
@@ -77,9 +89,36 @@
   .figure .label{font-size:12px;color:var(--ink-soft);font-weight:700;letter-spacing:.03em;}
   .figure .value{font-family:'Noto Serif JP',serif;font-size:32px;color:var(--navy);margin-top:6px;line-height:1;}
   .figure .value small{font-size:14px;font-weight:500;color:var(--ink-soft);margin-left:4px;}
+  .figure .sub{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
   .figure .range{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
   .figure.hero{background:#faf8f2;}
   .figure.hero .value{color:var(--brass-deep);font-size:36px;}
+
+  /* 種別「すべて」選択時の内訳カード */
+  .breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--line);}
+  @media (max-width:700px){ .breakdown{grid-template-columns:1fr;} }
+  .breakdown-card{padding:20px 22px;border-right:1px solid var(--line);}
+  .breakdown-card:last-child{border-right:none;}
+  .breakdown-card h4{margin:0 0 10px;font-size:14px;color:var(--navy);font-family:'Noto Serif JP',serif;}
+  .breakdown-card .bd-value{font-family:'Noto Serif JP',serif;font-size:24px;color:var(--brass-deep);}
+  .breakdown-card .bd-sub{font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.6;}
+  .breakdown-card .bd-link{
+    display:inline-block;margin-top:12px;font-size:12.5px;color:var(--navy);font-weight:700;
+    text-decoration:underline;cursor:pointer;background:none;border:none;padding:0;
+  }
+  .breakdown-note{padding:14px 24px;font-size:12px;color:var(--ink-soft);background:#faf8f2;}
+
+  .refine{
+    display:flex;gap:14px;flex-wrap:wrap;align-items:end;padding:18px 24px;
+    border-bottom:1px solid var(--line);background:#fcfbf8;
+  }
+  .refine .field{min-width:160px;}
+  .refine .field label{font-size:11.5px;}
+  .refine-result{
+    margin:0 24px 4px;padding:14px 16px;background:#eef2ee;border:1px solid #cdd9cf;border-radius:3px;
+    font-size:13px;color:var(--ink);
+  }
+  .refine-result b{color:var(--navy);}
 
   .samples{padding:20px 24px 24px;}
   .samples h3{font-size:13px;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;margin:0 0 12px;}
@@ -94,6 +133,19 @@
     display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:10px;
     background:#efe6d3;color:var(--brass-deep);margin-left:8px;vertical-align:middle;
   }
+
+  .next-steps{padding:22px 24px 26px;border-top:1px solid var(--line);}
+  .next-steps h3{font-size:13px;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;margin:0 0 4px;}
+  .next-steps p{font-size:12.5px;color:var(--ink-soft);margin:0 0 14px;}
+  .next-steps-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media (max-width:760px){ .next-steps-buttons{grid-template-columns:1fr;} }
+  .next-step-btn{
+    display:block;padding:14px 16px;background:var(--navy);color:#fff;text-decoration:none;
+    border-radius:3px;font-size:13.5px;font-weight:700;text-align:center;line-height:1.5;
+    transition:background .15s ease;
+  }
+  .next-step-btn:hover{background:var(--navy-2);}
+
   .cta-footer{
     margin-top:40px;
     background:var(--paper-2);
@@ -132,7 +184,7 @@
       <div class="eyebrow">AREA MARKET SEARCH</div>
       <h1>あなたの物件、このエリアなら&nbsp;いくらで売れる？</h1>
     </div>
-    <div class="src">出典：国土交通省「不動産情報ライブラリ」<br>成約価格情報をもとに集計（神奈川県全域対応）</div>
+    <div class="src">出典：国土交通省「不動産情報ライブラリ」<br>不動産取引価格情報・成約価格情報をもとに集計（神奈川県全域対応）</div>
   </div>
 
   <div class="search-card">
@@ -141,21 +193,21 @@
       <select id="city-select"></select>
     </div>
     <div class="field">
-      <label for="district-select">エリア（地区）</label>
-      <select id="district-select" disabled><option>読み込み中...</option></select>
-    </div>
-    <div class="field">
       <label for="type-select">種別</label>
       <select id="type-select">
-        <option value="all">すべて</option>
+        <option value="all">すべて（種類別に比較）</option>
         <option value="land">土地のみ</option>
         <option value="house">中古戸建のみ</option>
         <option value="mansion">マンションのみ</option>
       </select>
     </div>
+    <div class="field">
+      <label for="district-select">エリア（地区）</label>
+      <select id="district-select" disabled><option>読み込み中...</option></select>
+    </div>
     <button class="go" id="search-btn">相場を調べる</button>
   </div>
-  <p class="hint">※国が公開する成約価格の届出データ（回収率は取引全体の一部）をもとにした参考値です。実際の査定額を保証するものではありません。坪単価は「取引総額 ÷ 面積 × 3.305785」で算出しています。地区は町字単位（丁目単位ではありません）。</p>
+  <p class="hint">※国が公開する取引・成約データ（届出ベースのため取引全体の一部）をもとにした参考値です。実際の査定額を保証するものではありません。坪単価は「取引総額 ÷ 面積 × 3.305785」で算出しています。地区は町字単位（丁目単位ではありません）。</p>
 
   <div id="result"></div>
 
@@ -178,9 +230,44 @@
  * ===================================================================== */
 
 const TYPE_LABELS = { all: 'すべて', land: '土地', house: '中古戸建', mansion: 'マンション' };
+const RELIABILITY_MIN_COUNT = 5; // これ未満の件数は「参考程度」の注記を出す
+const CONSULT_URL = 'https://citycreationnet-cloud.github.io/ouchi-shindan/';
 
-// config.php の TARGET_CITIES と同じ内容（表示名とコードの対応表）
+// config.php の TARGET_CITIES と同じ内容（表示名とコードの対応表）。
+// 平塚市を中心とした西湘・湘南エリアを先頭に、その他の神奈川県内市区町村を続けている。
 const CITIES = [
+  // ---- 西湘・湘南エリア（優先表示） ----
+  { code: '14203', name: '平塚市' },
+  { code: '14341', name: '大磯町' },
+  { code: '14342', name: '二宮町' },
+  { code: '14361', name: '中井町' },
+  { code: '14362', name: '大井町' },
+  { code: '14363', name: '松田町' },
+  { code: '14364', name: '山北町' },
+  { code: '14366', name: '開成町' },
+  { code: '14206', name: '小田原市' },
+  { code: '14217', name: '南足柄市' },
+  { code: '14382', name: '箱根町' },
+  { code: '14383', name: '真鶴町' },
+  { code: '14384', name: '湯河原町' },
+  { code: '14211', name: '秦野市' },
+  { code: '14214', name: '伊勢原市' },
+  { code: '14212', name: '厚木市' },
+  { code: '14215', name: '海老名市' },
+  { code: '14216', name: '座間市' },
+  { code: '14218', name: '綾瀬市' },
+  { code: '14213', name: '大和市' },
+  { code: '14207', name: '茅ヶ崎市' },
+  { code: '14321', name: '寒川町' },
+  { code: '14205', name: '藤沢市' },
+  { code: '14204', name: '鎌倉市' },
+  { code: '14208', name: '逗子市' },
+  { code: '14301', name: '葉山町' },
+  { code: '14210', name: '三浦市' },
+  { code: '14201', name: '横須賀市' },
+  { code: '14401', name: '愛川町' },
+  { code: '14402', name: '清川村' },
+  // ---- 横浜市（18区） ----
   { code: '14101', name: '横浜市鶴見区' }, { code: '14102', name: '横浜市神奈川区' },
   { code: '14103', name: '横浜市西区' },   { code: '14104', name: '横浜市中区' },
   { code: '14105', name: '横浜市南区' },   { code: '14106', name: '横浜市保土ケ谷区' },
@@ -190,27 +277,14 @@ const CITIES = [
   { code: '14113', name: '横浜市緑区' },   { code: '14114', name: '横浜市瀬谷区' },
   { code: '14115', name: '横浜市栄区' },   { code: '14116', name: '横浜市泉区' },
   { code: '14117', name: '横浜市青葉区' }, { code: '14118', name: '横浜市都筑区' },
+  // ---- 川崎市（7区） ----
   { code: '14131', name: '川崎市川崎区' }, { code: '14132', name: '川崎市幸区' },
   { code: '14133', name: '川崎市中原区' }, { code: '14134', name: '川崎市高津区' },
   { code: '14135', name: '川崎市多摩区' }, { code: '14136', name: '川崎市宮前区' },
   { code: '14137', name: '川崎市麻生区' },
+  // ---- 相模原市（3区） ----
   { code: '14151', name: '相模原市緑区' }, { code: '14152', name: '相模原市中央区' },
   { code: '14153', name: '相模原市南区' },
-  { code: '14201', name: '横須賀市' }, { code: '14203', name: '平塚市' },
-  { code: '14204', name: '鎌倉市' },   { code: '14205', name: '藤沢市' },
-  { code: '14206', name: '小田原市' }, { code: '14207', name: '茅ヶ崎市' },
-  { code: '14208', name: '逗子市' },   { code: '14210', name: '三浦市' },
-  { code: '14211', name: '秦野市' },   { code: '14212', name: '厚木市' },
-  { code: '14213', name: '大和市' },   { code: '14214', name: '伊勢原市' },
-  { code: '14215', name: '海老名市' }, { code: '14216', name: '座間市' },
-  { code: '14217', name: '南足柄市' }, { code: '14218', name: '綾瀬市' },
-  { code: '14301', name: '葉山町' },   { code: '14321', name: '寒川町' },
-  { code: '14341', name: '大磯町' },   { code: '14342', name: '二宮町' },
-  { code: '14361', name: '中井町' },   { code: '14362', name: '大井町' },
-  { code: '14363', name: '松田町' },   { code: '14364', name: '山北町' },
-  { code: '14366', name: '開成町' },   { code: '14382', name: '箱根町' },
-  { code: '14383', name: '真鶴町' },   { code: '14384', name: '湯河原町' },
-  { code: '14401', name: '愛川町' },   { code: '14402', name: '清川村' },
 ];
 
 const citySelect = document.getElementById('city-select');
@@ -225,6 +299,7 @@ function init(){
   citySelect.innerHTML = CITIES.map(c => `<option value="${c.code}">${c.name}</option>`).join('');
   loadDistricts(citySelect.value);
   citySelect.addEventListener('change', () => loadDistricts(citySelect.value));
+  typeSelect.addEventListener('change', () => populateDistrictOptions());
   searchBtn.addEventListener('click', runSearch);
 }
 
@@ -248,46 +323,45 @@ async function loadDistricts(cityCode){
     return;
   }
 
+  populateDistrictOptions();
+}
+
+// 選択中の「種別」における件数で、エリア（地区）の選択肢を並べ替えて表示する
+function populateDistrictOptions(){
+  if (!currentCityData) return;
+  const type = typeSelect.value;
+  const countKey = type === 'all' ? 'all' : type;
+
   const districts = Object.keys(currentCityData.districts).map(name => ({
-    name, count: currentCityData.districts[name].all.count,
+    name, count: currentCityData.districts[name][countKey]?.count ?? 0,
   }));
   districts.sort((a, b) => b.count - a.count);
 
   districtSelect.innerHTML = districts
-    .map(d => `<option value="${d.name}">${d.name}（成約${d.count}件）</option>`)
+    .map(d => `<option value="${d.name}">${d.name}（${TYPE_LABELS[type]}${d.count}件）</option>`)
     .join('');
   districtSelect.disabled = false;
 }
 
 function runSearch(){
   if (!currentCityData) return;
-
   const cityName = currentCityData.municipality;
   const district = districtSelect.value.replace(/（.*/, '');
   const type = typeSelect.value;
-  const stats = currentCityData.districts[district]?.[type];
 
-  if (!stats) {
+  if (!currentCityData.districts[district]) {
     resultEl.innerHTML = `<div class="result-card"><div class="empty">データを取得できませんでした。</div></div>`;
     return;
   }
 
-  render({
-    municipality: cityName,
-    district,
-    type,
-    updated_at: currentCityData.updated_at,
-    sample_count: stats.count,
-    avg_price_per_sqm: stats.avg_price_per_sqm,
-    min_price_per_sqm: stats.min_price_per_sqm,
-    max_price_per_sqm: stats.max_price_per_sqm,
-    avg_price_per_tsubo: stats.avg_price_per_tsubo,
-    min_price_per_tsubo: stats.min_price_per_tsubo,
-    max_price_per_tsubo: stats.max_price_per_tsubo,
-    avg_trade_price: stats.avg_trade_price,
-    samples: stats.samples,
-  }, cityName);
+  if (type === 'all') {
+    renderBreakdown(currentCityData, district, cityName);
+  } else {
+    renderDetail(currentCityData, district, type, cityName);
+  }
 }
+
+// ---------- 表示用ユーティリティ ----------
 
 // 金額はすべて「円」単位で保持しているため、表示時に万円へ変換する
 function manYen(yen){
@@ -299,7 +373,6 @@ function dateJP(iso){
   const d = new Date(iso);
   return `${d.getFullYear()}年${d.getMonth()+1}月更新`;
 }
-
 // BuildingYearの文字列（例："2014年"）から築年数を計算する
 function buildingAge(buildingYear){
   if (!buildingYear) return null;
@@ -308,12 +381,189 @@ function buildingAge(buildingYear){
   const age = new Date().getFullYear() - parseInt(m[1], 10);
   return age >= 0 ? age : null;
 }
+function periodRangeText(yearsCovered, oldest, latest){
+  let text = '';
+  if (yearsCovered && yearsCovered.length === 2) {
+    text += `集計対象：${yearsCovered[0]}年〜${yearsCovered[1]}年の取引・成約データ`;
+  }
+  if (latest) {
+    text += (text ? '　' : '') + `直近の取引：${latest}`;
+  }
+  return text;
+}
+function reliabilityNoteHtml(count){
+  if (count >= RELIABILITY_MIN_COUNT) return '';
+  return `<div class="reliability-note">※このエリア・種別の件数は${count}件と少ないため、参考程度としてご覧ください。</div>`;
+}
+function ctaLinks(cityName, district, typeLabel){
+  const base = (intent, label) => {
+    const params = new URLSearchParams({ city: cityName, district: district, type: typeLabel, intent });
+    return `<a class="next-step-btn" href="${CONSULT_URL}?${params.toString()}#contact" target="_blank" rel="noopener">${label}</a>`;
+  };
+  return `
+    <div class="next-steps">
+      <h3>この結果をもとに、もう一歩詳しく</h3>
+      <p>エリアの相場はあくまで目安です。ご自宅の条件を踏まえた具体的な話は、無料相談で承ります。</p>
+      <div class="next-steps-buttons">
+        ${base('detail', '自宅の条件で詳しく知りたい')}
+        ${base('proceeds', '売却した場合の手取りを知りたい')}
+        ${base('consider', '売るか、持つか、家族で検討したい')}
+      </div>
+    </div>
+  `;
+}
 
-function render(p, cityName){
-  const hasData = p.sample_count > 0;
-  const typeLabel = TYPE_LABELS[p.type] ?? 'すべて';
+// ---------- 「すべて」選択時：種別ごとの内訳表示 ----------
 
-  const rows = (p.samples || []).map(s => {
+function renderBreakdown(cityData, district, cityName){
+  const cats = ['land', 'house', 'mansion'];
+  const catLabels = { land: '土地', house: '中古戸建', mansion: 'マンション' };
+  const bucketAll = cityData.districts[district]['all'];
+
+  const cards = cats.map(cat => {
+    const b = cityData.districts[district][cat];
+    if (!b || b.count === 0) {
+      return `
+        <div class="breakdown-card">
+          <h4>${catLabels[cat]}</h4>
+          <div class="bd-sub">該当する事例が見つかりませんでした。</div>
+        </div>`;
+    }
+    return `
+      <div class="breakdown-card">
+        <h4>${catLabels[cat]}</h4>
+        <div class="bd-value">${manYen(b.avg_price_per_tsubo)}<span style="font-size:13px;color:var(--ink-soft);">/坪</span></div>
+        <div class="bd-sub">
+          中央値：${manYen(b.median_price_per_tsubo)}/坪<br>
+          件数：${b.count}件${b.count < RELIABILITY_MIN_COUNT ? '（参考程度）' : ''}
+        </div>
+        <button class="bd-link" data-type="${cat}">この種別で詳しく見る →</button>
+      </div>`;
+  }).join('');
+
+  resultEl.innerHTML = `
+    <div class="result-card">
+      <div class="result-head">
+        <div class="place">${cityName} <b>${district}</b> の相場<span class="badge">種類別比較</span></div>
+        <div class="updated">${dateJP(cityData.updated_at)}</div>
+      </div>
+      <div class="period-line">${periodRangeText(cityData.years_covered, bucketAll.oldest_period, bucketAll.latest_period)}　全体件数：${bucketAll.count}件</div>
+      <div class="breakdown">${cards}</div>
+      <div class="breakdown-note">
+        土地・中古戸建・マンションは、面積の基準（土地面積／専有面積）や市場の動き方が異なるため、
+        まとめた平均ではなく種類ごとの数値でご確認いただく形にしています。中古戸建は明らかな高額外れ値を、
+        土地は価格・面積の両方について極端な外れ値を除外して算出しています。
+      </div>
+      ${ctaLinks(cityName, district, 'すべて（種類別比較）')}
+    </div>
+  `;
+
+  resultEl.querySelectorAll('.bd-link').forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeSelect.value = btn.dataset.type;
+      populateDistrictOptions();
+      districtSelect.value = district;
+      runSearch();
+    });
+  });
+}
+
+// ---------- 種別を指定した詳細表示 ----------
+
+function renderDetail(cityData, district, type, cityName){
+  const stats = cityData.districts[district][type];
+  const typeLabel = TYPE_LABELS[type];
+
+  if (!stats || stats.count === 0) {
+    resultEl.innerHTML = `
+      <div class="result-card">
+        <div class="result-head">
+          <div class="place">${cityName} <b>${district}</b> の相場<span class="badge">${typeLabel}</span></div>
+          <div class="updated">${dateJP(cityData.updated_at)}</div>
+        </div>
+        <div class="empty">このエリア・種別（${typeLabel}）に該当する事例が見つかりませんでした。<br>他の種別、または近隣エリアもあわせてご確認ください。</div>
+      </div>`;
+    return;
+  }
+
+  resultEl.innerHTML = `
+    <div class="result-card">
+      <div class="result-head">
+        <div class="place">${cityName} <b>${district}</b> の相場<span class="badge">${typeLabel}・${stats.count}件</span></div>
+        <div class="updated">${dateJP(cityData.updated_at)}</div>
+      </div>
+      <div class="period-line">${periodRangeText(cityData.years_covered, stats.oldest_period, stats.latest_period)}</div>
+      ${reliabilityNoteHtml(stats.count)}
+      <div class="figures">
+        <div class="figure hero">
+          <div class="label">平均坪単価</div>
+          <div class="value">${manYen(stats.avg_price_per_tsubo)}<small>/坪</small></div>
+          <div class="sub">中央値：${manYen(stats.median_price_per_tsubo)}/坪</div>
+          <div class="range">レンジ：${manYen(stats.min_price_per_tsubo)}〜${manYen(stats.max_price_per_tsubo)}／㎡単価換算：約${manYen(stats.avg_price_per_sqm)}/㎡</div>
+        </div>
+        <div class="figure">
+          <div class="label">平均成約価格</div>
+          <div class="value">${manYen(stats.avg_trade_price)}</div>
+        </div>
+        <div class="figure">
+          <div class="label">件数</div>
+          <div class="value">${stats.count}<small>件</small></div>
+        </div>
+      </div>
+
+      ${type !== 'land' ? `
+      <div class="refine">
+        <div class="field">
+          <label for="age-filter">築年数で絞り込む</label>
+          <select id="age-filter">
+            <option value="all">指定なし</option>
+            <option value="10">築10年以内</option>
+            <option value="20">築20年以内</option>
+            <option value="20+">築20年超</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="area-filter">面積で絞り込む</label>
+          <select id="area-filter">
+            <option value="all">指定なし</option>
+            <option value="small">30坪未満</option>
+            <option value="mid">30〜50坪</option>
+            <option value="large">50坪以上</option>
+          </select>
+        </div>
+      </div>
+      <div id="refine-result"></div>
+      ` : ''}
+
+      <div class="samples">
+        <h3>直近の成約事例（サンプル・最大${stats.samples.length}件）</h3>
+        <table>
+          <thead><tr><th>取引時期</th><th>種別</th><th>面積</th><th>建物面積</th><th>築年数</th><th>成約価格</th><th>坪単価</th></tr></thead>
+          <tbody id="samples-tbody"></tbody>
+        </table>
+      </div>
+      <div class="note">
+        本結果は国土交通省「不動産情報ライブラリ」で公開されている不動産取引価格情報・成約価格情報を統計的に集計した参考値です。坪単価は「取引総額 ÷ 面積 × 3.305785」で算出しています（土地・戸建は土地面積、マンションは専有面積を使用）。地区名は町字単位で提供されており、丁目単位の絞り込みには対応していません。${type === 'house' ? '中古戸建は明らかな高額外れ値を除外しています。' : ''}${type === 'land' ? '土地は価格・面積の両方について、明らかな外れ値を除外しています。' : ''}個別物件の条件により実際の価格は変動します。
+      </div>
+      ${ctaLinks(cityName, district, typeLabel)}
+    </div>
+  `;
+
+  renderSampleRows(stats.samples);
+
+  const ageFilterEl = document.getElementById('age-filter');
+  const areaFilterEl = document.getElementById('area-filter');
+  if (ageFilterEl && areaFilterEl) {
+    const update = () => applyRefineFilter(stats.samples, ageFilterEl.value, areaFilterEl.value);
+    ageFilterEl.addEventListener('change', update);
+    areaFilterEl.addEventListener('change', update);
+  }
+}
+
+function renderSampleRows(samples){
+  const tbody = document.getElementById('samples-tbody');
+  if (!tbody) return;
+  const rows = (samples || []).map(s => {
     const age = buildingAge(s.building_year);
     return `
     <tr>
@@ -324,55 +574,70 @@ function render(p, cityName){
       <td class="num">${age !== null ? age + '年' : '－'}</td>
       <td class="num">${manYen(s.trade_price)}</td>
       <td class="num">${s.price_per_tsubo ? manYen(s.price_per_tsubo) + '/坪' : '－'}</td>
-    </tr>
-  `;
+    </tr>`;
   }).join('');
+  tbody.innerHTML = rows || '<tr><td colspan="7">サンプルデータがありません</td></tr>';
+}
 
-  if (!hasData) {
-    resultEl.innerHTML = `
-      <div class="result-card">
-        <div class="result-head">
-          <div class="place">${cityName} <b>${p.district}</b> の相場<span class="badge">${typeLabel}</span></div>
-          <div class="updated">${dateJP(p.updated_at)}</div>
-        </div>
-        <div class="empty">このエリア・種別（${typeLabel}）に該当する成約事例が見つかりませんでした。<br>他の種別、または近隣エリアもあわせてご確認ください。</div>
-      </div>`;
+// 築年数・面積で、取得済みサンプル（最大50件）の中から再絞り込みして参考値を計算する
+function applyRefineFilter(samples, ageFilter, areaFilter){
+  const box = document.getElementById('refine-result');
+  if (ageFilter === 'all' && areaFilter === 'all') {
+    box.innerHTML = '';
+    renderSampleRows(samples);
     return;
   }
 
-  resultEl.innerHTML = `
-    <div class="result-card">
-      <div class="result-head">
-        <div class="place">${cityName} <b>${p.district}</b> の相場<span class="badge">${typeLabel}・成約${p.sample_count}件</span></div>
-        <div class="updated">${dateJP(p.updated_at)}</div>
-      </div>
-      <div class="figures">
-        <div class="figure hero">
-          <div class="label">平均坪単価</div>
-          <div class="value">${manYen(p.avg_price_per_tsubo)}<small>/坪</small></div>
-          <div class="range">レンジ：${manYen(p.min_price_per_tsubo)}〜${manYen(p.max_price_per_tsubo)}／㎡単価換算：約${manYen(p.avg_price_per_sqm)}/㎡</div>
-        </div>
-        <div class="figure">
-          <div class="label">平均成約価格</div>
-          <div class="value">${manYen(p.avg_trade_price)}</div>
-        </div>
-        <div class="figure">
-          <div class="label">成約件数</div>
-          <div class="value">${p.sample_count}<small>件</small></div>
-        </div>
-      </div>
-      <div class="samples">
-        <h3>直近の成約事例（サンプル）</h3>
-        <table>
-          <thead><tr><th>取引時期</th><th>種別</th><th>面積</th><th>建物面積</th><th>築年数</th><th>成約価格</th><th>坪単価</th></tr></thead>
-          <tbody>${rows || '<tr><td colspan="7">サンプルデータがありません</td></tr>'}</tbody>
-        </table>
-      </div>
-      <div class="note">
-        本結果は国土交通省「不動産情報ライブラリ」で公開されている成約価格情報を統計的に集計した参考値です。坪単価は「取引総額 ÷ 面積 × 3.305785」で算出しています（土地・戸建は土地面積、マンションは専有面積を使用）。地区名は町字単位で提供されており、丁目単位の絞り込みには対応していません。中古戸建の集計は、統計的に明らかな高額外れ値を除外しています。個別物件の条件により実際の価格は変動します。正確な査定をご希望の方はお問い合わせください。
-      </div>
+  const filtered = samples.filter(s => {
+    if (ageFilter !== 'all') {
+      const age = buildingAge(s.building_year);
+      if (age === null) return false;
+      if (ageFilter === '10' && age > 10) return false;
+      if (ageFilter === '20' && age > 20) return false;
+      if (ageFilter === '20+' && age <= 20) return false;
+    }
+    if (areaFilter !== 'all') {
+      if (s.area === null || s.area === undefined) return false;
+      const tsubo = s.area / 3.305785;
+      if (areaFilter === 'small' && tsubo >= 30) return false;
+      if (areaFilter === 'mid' && (tsubo < 30 || tsubo >= 50)) return false;
+      if (areaFilter === 'large' && tsubo < 50) return false;
+    }
+    return true;
+  });
+
+  renderSampleRows(filtered);
+
+  if (filtered.length === 0) {
+    box.innerHTML = `<div class="refine-result">条件に合う事例が、取得済みのサンプルの中には見つかりませんでした。</div>`;
+    return;
+  }
+
+  const tsuboValues = filtered.map(s => s.price_per_tsubo).filter(v => v !== null && v !== undefined);
+  if (tsuboValues.length === 0) {
+    box.innerHTML = `<div class="refine-result">条件に合う事例は${filtered.length}件ありますが、単価を算出できるデータがありませんでした。</div>`;
+    return;
+  }
+  const avg = tsuboValues.reduce((a, b) => a + b, 0) / tsuboValues.length;
+  const sorted = [...tsuboValues].sort((a, b) => a - b);
+  const median = percentileJS(sorted, 50);
+
+  box.innerHTML = `
+    <div class="refine-result">
+      類似条件（表示中の事例${samples.length}件のうち${filtered.length}件が該当）での参考値：
+      平均<b>${manYen(avg)}/坪</b>　中央値<b>${manYen(median)}/坪</b>
+      ${filtered.length < RELIABILITY_MIN_COUNT ? '<br>※件数が少ないため参考程度です。' : ''}
+      <br><span style="font-size:11.5px;">※直近最大${samples.length}件のサンプルの中から絞り込んだ参考値です（全件を再集計したものではありません）。</span>
     </div>
   `;
+}
+function percentileJS(sortedValues, pct){
+  const index = (pct / 100) * (sortedValues.length - 1);
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  if (lower === upper) return sortedValues[lower];
+  const frac = index - lower;
+  return sortedValues[lower] + (sortedValues[upper] - sortedValues[lower]) * frac;
 }
 
 init();

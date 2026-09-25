@@ -4,8 +4,9 @@
  * -----------------------------------------------------------------
  * 【GitHub Actions版】
  * 対象市区町村（config.php の TARGET_CITIES）について、直近数年分の
- * 成約価格情報を取得し、地区（DistrictName）× 種別（土地／中古戸建／
- * マンション）ごとに集計して cache/{市区町村コード}.json に保存します。
+ * 不動産取引価格情報・成約価格情報（両方）を取得し、地区（DistrictName）
+ * × 種別（土地／中古戸建／マンション）ごとに集計して
+ * cache/{市区町村コード}.json に保存します。
  *
  * このスクリプトは GitHub Actions のワークフロー（.github/workflows/
  * update-cache.yml）から、月1回自動実行されます。手動で実行したい場合は、
@@ -17,19 +18,31 @@
  * 渡されます（このファイルやリポジトリにはAPIキーを直接書きません）。
  * -----------------------------------------------------------------
  *
- * ◆単価の計算方法について（㎡単価をメインに変更）
- * 当初は坪単価をメイン指標にしていましたが、以下の理由で「平米(㎡)単価」を
- * メイン、坪単価はそこから換算した参考値、という構成に変更しました。
+ * ◆単価の計算方法
+ *   平米単価（円/㎡） = 取引総額（円） ÷ 面積（㎡）
+ *   坪単価　（円/坪） = 平米単価 × 3.305785（1坪=3.305785㎡）
+ * APIが返す PricePerUnit・UnitPriceの各フィールドは空欄になるケースが多く、
+ * 単位の仕様も公開マニュアルに明記されていないため、いずれも使わず
+ * 「取引総額÷面積」から自前で計算しています。土地・戸建は「面積」＝
+ * 土地面積、マンションは「面積」＝専有面積を使うため、同じ式で一貫して
+ * 算出できます。値は常に「円」単位で保存し、画面表示側で万円等に変換します。
  *
- *   平米単価（円/㎡） = 取引総額（円） ÷ 面積（㎡）        … メイン指標
- *   坪単価　（円/坪） = 平米単価 × 3.305785                … 参考値（1坪=3.305785㎡）
+ * ◆データの種類について
+ * priceClassificationを指定せず、「不動産取引価格情報」と「成約価格情報」
+ * の両方を取得しています（成約価格情報だけだと、戸建・マンションしか
+ * 含まれず、土地の取引が構造的に取れないため）。
  *
- * APIが返す PricePerUnit（坪単価）や UnitPrice（平米単価）の各フィールドは
- * 空欄になるケースが多く、公開マニュアルにも単位の詳細な仕様が明記されて
- * いないため、いずれも使わず「取引総額÷面積」から自前で計算しています。
- * 土地・戸建は「面積」＝土地面積、マンションは「面積」＝専有面積を使うため、
- * どちらも同じ式で一貫して算出できます。値は常に「円」単位で保存し、
- * 画面表示側で万円などに変換します。
+ * ◆外れ値除去について
+ * IQR（四分位範囲）による標準的な外れ値検出を行っています。
+ *   - 中古戸建：坪単価が明らかに高すぎる事例のみ除外（高い側だけ）
+ *   - 土地　　：坪単価・面積の両方について、高い側・低い側とも除外
+ *     （極端に狭い/広い区画が平均を歪めるのを防ぐため）
+ * 同一地区・種別のサンプルが5件未満の場合は、統計的に不安定なため
+ * 除外処理自体を行いません。
+ *
+ * ◆中央値・取引時期範囲
+ * 平均だけでなく中央値（外れ値の影響を受けにくい）も算出し、
+ * 集計に含まれる取引時期の範囲（最古・最新）も記録しています。
  */
 
 require __DIR__ . '/../config.php';
@@ -37,6 +50,7 @@ require __DIR__ . '/../lib/ReinfolibClient.php';
 
 const TSUBO_IN_SQM = 3.305785; // 1坪 = 3.305785㎡
 const TYPE_CATEGORIES = ['land', 'house', 'mansion']; // 'all' は別途常に集計
+const SAMPLE_LIMIT = 50; // フロント側で築年数・面積による再絞り込みができるよう、多めに保持
 
 $apiKey = getenv('REINFOLIB_API_KEY');
 if (!$apiKey) {
@@ -61,7 +75,7 @@ foreach (TARGET_CITIES as $target) {
     for ($y = $currentYear; $y > $currentYear - CACHE_YEARS_BACK; $y--) {
         try {
             $records = $client->getTransactions($target['pref'], $target['city'], $y, null, '');
-            echo "  {$y}年: {$target['name']} {$target['name']} 全" . count($records) . "件\n";
+            echo "  {$y}年: {$target['name']} 全" . count($records) . "件\n";
             $all = array_merge($all, $records);
         } catch (Throwable $e) {
             fwrite(STDERR, "  {$y}年: 取得失敗 - {$e->getMessage()}\n");
@@ -75,8 +89,9 @@ foreach (TARGET_CITIES as $target) {
     $ok = file_put_contents($cacheFile, json_encode([
         'municipality_code' => $target['city'],
         'municipality'      => $target['name'],
-        'updated_at'        => date('c'),
+        'updated_at'        => date('c'), // サイト（キャッシュ）の更新日時
         'raw_record_count'  => count($all),
+        'years_covered'     => [$currentYear - CACHE_YEARS_BACK + 1, $currentYear], // 集計対象の年範囲
         'districts'         => $aggregated,
     ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
@@ -123,8 +138,23 @@ function calc_price_per_sqm_yen(?int $tradePrice, ?float $area): ?int
 }
 
 /**
- * 空の集計バケットを作る（平米単価ベースで集計し、坪単価はここから換算する）
+ * Period文字列（例："2026年第1四半期"、"2024年"）を、大小比較できる
+ * 整数キーに変換する。四半期が無い場合は0四半期扱い。
  */
+function period_sort_key(?string $period): int
+{
+    if (!$period) {
+        return 0;
+    }
+    if (preg_match('/(\d{4})年第(\d)四半期/u', $period, $m)) {
+        return ((int) $m[1]) * 10 + (int) $m[2];
+    }
+    if (preg_match('/(\d{4})年/u', $period, $m)) {
+        return ((int) $m[1]) * 10;
+    }
+    return 0;
+}
+
 function empty_bucket(): array
 {
     return [];
@@ -210,8 +240,8 @@ function percentile(array $sortedValues, float $pct): float
 }
 
 /**
- * レコード配列（1地区×1種別分）から、最終的な平均・レンジ等を計算する。
- * 坪単価は「㎡単価の平均 × 3.305785」で換算する。
+ * レコード配列（1地区×1種別分）から、最終的な平均・中央値・レンジ等を計算する。
+ * 坪単価は「㎡単価の平均／中央値 × 3.305785」で換算する。
  *
  * @param array $outlierFields 外れ値除去の対象フィールドと方向の指定。
  *   例）['price_per_sqm' => 'upper'] … 中古戸建：高額側のみ除外
@@ -226,19 +256,53 @@ function finalize_bucket(array $records, array $outlierFields = []): array
 
     $sqmValues   = array_values(array_filter(array_map(fn ($r) => $r['price_per_sqm'], $records), fn ($v) => $v !== null));
     $priceValues = array_values(array_filter(array_map(fn ($r) => $r['trade_price'], $records), fn ($v) => $v !== null));
-    $avgSqm      = count($sqmValues) > 0 ? array_sum($sqmValues) / count($sqmValues) : null;
+
+    $avgSqm = count($sqmValues) > 0 ? array_sum($sqmValues) / count($sqmValues) : null;
+
+    $medianSqm = null;
+    if (count($sqmValues) > 0) {
+        $sorted = $sqmValues;
+        sort($sorted);
+        $medianSqm = percentile($sorted, 50);
+    }
+
+    // 取引時期の範囲（最古・最新）を調べる
+    $latestPeriod = null;
+    $oldestPeriod = null;
+    if (!empty($records)) {
+        $maxKey = -1;
+        $minKey = PHP_INT_MAX;
+        foreach ($records as $r) {
+            $k = period_sort_key($r['period']);
+            if ($k > $maxKey) {
+                $maxKey = $k;
+                $latestPeriod = $r['period'];
+            }
+            if ($k > 0 && $k < $minKey) {
+                $minKey = $k;
+                $oldestPeriod = $r['period'];
+            }
+        }
+    }
+
+    // 表示用サンプルは新しい取引順に並べ、最大 SAMPLE_LIMIT 件だけ保持する
+    usort($records, fn ($a, $b) => period_sort_key($b['period']) <=> period_sort_key($a['period']));
 
     return [
-        'count'               => count($records),
-        'avg_price_per_sqm'   => $avgSqm !== null ? (int) round($avgSqm) : null,
-        'min_price_per_sqm'   => count($sqmValues) > 0 ? min($sqmValues) : null,
-        'max_price_per_sqm'   => count($sqmValues) > 0 ? max($sqmValues) : null,
-        'avg_price_per_tsubo' => $avgSqm !== null ? (int) round($avgSqm * TSUBO_IN_SQM) : null,
-        'min_price_per_tsubo' => count($sqmValues) > 0 ? (int) round(min($sqmValues) * TSUBO_IN_SQM) : null,
-        'max_price_per_tsubo' => count($sqmValues) > 0 ? (int) round(max($sqmValues) * TSUBO_IN_SQM) : null,
-        'avg_trade_price'     => count($priceValues) > 0 ? (int) round(array_sum($priceValues) / count($priceValues)) : null,
-        // 表示用サンプルは最大20件（外れ値除去後の中から）
-        'samples'             => array_slice($records, 0, 20),
+        'count'                  => count($records),
+        'avg_price_per_sqm'      => $avgSqm !== null ? (int) round($avgSqm) : null,
+        'median_price_per_sqm'   => $medianSqm !== null ? (int) round($medianSqm) : null,
+        'min_price_per_sqm'      => count($sqmValues) > 0 ? min($sqmValues) : null,
+        'max_price_per_sqm'      => count($sqmValues) > 0 ? max($sqmValues) : null,
+        'avg_price_per_tsubo'    => $avgSqm !== null ? (int) round($avgSqm * TSUBO_IN_SQM) : null,
+        'median_price_per_tsubo' => $medianSqm !== null ? (int) round($medianSqm * TSUBO_IN_SQM) : null,
+        'min_price_per_tsubo'    => count($sqmValues) > 0 ? (int) round(min($sqmValues) * TSUBO_IN_SQM) : null,
+        'max_price_per_tsubo'    => count($sqmValues) > 0 ? (int) round(max($sqmValues) * TSUBO_IN_SQM) : null,
+        'avg_trade_price'        => count($priceValues) > 0 ? (int) round(array_sum($priceValues) / count($priceValues)) : null,
+        'latest_period'          => $latestPeriod,
+        'oldest_period'          => $oldestPeriod,
+        // 表示・再絞り込み用サンプル（新しい順、最大SAMPLE_LIMIT件）
+        'samples'                => array_slice($records, 0, SAMPLE_LIMIT),
     ];
 }
 
@@ -267,15 +331,15 @@ function aggregate_by_district(array $records): array
         }
 
         $sample = [
-            'period'            => $r['Period'] ?? null,
-            'type'              => $r['Type'] ?? null,
-            'trade_price'       => $tradePrice,
-            'price_per_sqm'     => $sqmYen,
-            'price_per_tsubo'   => $sqmYen !== null ? (int) round($sqmYen * TSUBO_IN_SQM) : null,
-            'area'              => $area,
-            'total_floor_area'  => is_numeric($r['TotalFloorArea'] ?? null) ? (float) $r['TotalFloorArea'] : null,
-            'structure'         => $r['Structure'] ?? null,
-            'building_year'     => $r['BuildingYear'] ?? null,
+            'period'           => $r['Period'] ?? null,
+            'type'             => $r['Type'] ?? null,
+            'trade_price'      => $tradePrice,
+            'price_per_sqm'    => $sqmYen,
+            'price_per_tsubo'  => $sqmYen !== null ? (int) round($sqmYen * TSUBO_IN_SQM) : null,
+            'area'             => $area,
+            'total_floor_area' => is_numeric($r['TotalFloorArea'] ?? null) ? (float) $r['TotalFloorArea'] : null,
+            'structure'        => $r['Structure'] ?? null,
+            'building_year'    => $r['BuildingYear'] ?? null,
         ];
 
         // 「すべて」バケットには種別を問わず全件を加算
